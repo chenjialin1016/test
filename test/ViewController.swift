@@ -33,6 +33,9 @@ class ViewController: UIViewController {
         
         //算法调用
         self.algorithmTest()
+        
+        //排序
+        self.sortTest()
     }
     
     func algorithmTest(){
@@ -45,7 +48,118 @@ class ViewController: UIViewController {
         print("result \(Algorithm.isValid("()[]{}"))")
         print("result \(Algorithm.isValid("(]"))")
         print("result \(Algorithm.isValid("([)]"))")
+        
+        //合并两个有序链表
+        var node1 = ListNode(1)
+        let node2 = ListNode(2)
+        let node3 = ListNode(4)
+        node1.next = node2
+        node2.next = node3
+        let node4 = ListNode(1)
+        let node5 = ListNode(3)
+        let node6 = ListNode(4)
+        node4.next = node5
+        node5.next = node6
+//        var node = Algorithm.mergeTwoLists(node1, node4)
+//        var array : [Int] = [Int]()
+//        while node != nil {
+//            array.append((node?.val)!)
+//            node = node?.next
+//        }
+//        print("result ", array)
+        var node11 = Algorithm.mergeTwoLists1(node1, node4)
+        var array11 : [Int] = [Int]()
+        while node11 != nil {
+            array11.append((node11?.val)!)
+            node11 = node11?.next
+        }
+        print("result ", array11)
+        
+//        let node7 = ListNode(2)
+//        let node8 = ListNode(6)
+//        node7.next = node8
+//        var nodeArr = [node1, node4,node7]
+//        var node22 = Algorithm.mergeKLists(nodeArr)
+//        var array22 : [Int] = [Int]()
+//        while node22 != nil {
+//            array22.append((node22?.val)!)
+//            node22 = node22?.next
+//        }
+//        print("result ", array22)
+        
     }
+    
+    //排序
+    func sortTest(){
+        
+        //冒泡
+        print("冒泡")
+        let array = [1,3,6,9,0,5,2,4,8,7]
+        SortSummary.bubbleSort(array)
+        SortSummary.bubbleSort1(array)
+        SortSummary.bubbleSort2(array)
+        print("\n")
+        
+        //选择
+        print("选择")
+        let array2 = [8, 5, 2, 6, 9, 3, 1, 4, 0, 7]
+        SortSummary.chooseSort(array2)
+        print("\n")
+        
+        //插入
+        print("插入")
+        let array3 = [8, 3, 5, 4, 6]
+        SortSummary.insertSort(array3)
+        SortSummary.insertSort1(array3)
+        SortSummary.insertSort2(array3)
+        SortSummary.insertSort3(array3, <)
+        //insertSort3(array3){$0<$1}等同于insertSort3(array3, <)
+        SortSummary.insertSort3(array3){$0<$1}
+        SortSummary.insertSort3(array3, >)
+        print("\n")
+        
+        //堆
+        print("堆")
+        var array4 = [62, 88, 58, 47, 62, 35, 73, 51, 99, 37, 93]
+        SortSummary.heapSort(&array4)
+        print(array4,"\n")
+        
+        //归并
+        print("归并")
+        var array5 = [2, 1, 5, 4, 9]
+        array5 = SortSummary.mergeSort(array5)
+        print(array5)
+        array5 = SortSummary.mergeSortBottomUp(array5, <)
+        print(array5,"\n")
+        
+        //快速
+        print("快速")
+        var array6 = [5, 7, 1, 8, 4]
+        SortSummary.quickSort(&array6, 0, array6.count-1)
+        print(array6,"\n")
+        
+        //希尔
+        print("希尔")
+        var array7 = [49, 38, 65, 97, 26, 13, 27, 49, 55, 4]
+        SortSummary.shellSort(&array7)
+        print(array7,"\n")
+        
+        //希尔
+        print("桶")
+        var array8 = [1,34,66,90,99,34,56,2,3,47,66,99]
+        array8 = SortSummary.bucketSort(array8, 100)
+        print(array8,"\n")
+        
+        //实例
+        print("实例")
+        var array9 = [MeetingTime.init(1, 3), MeetingTime.init(5, 6), MeetingTime.init(4, 7), MeetingTime.init(2, 3)]
+        array9 = SortSummary.meetingTimeMerge(array9)
+        for i in array9 {
+            print(i.start,i.end,"\n")
+        }
+        
+    }
+    
     
     /*===========================================================================================*/
     //5、寻找字符串数组中最长公共前缀 --找到所有字符串中的公共前缀的最大长度--O(S⋅log(n)) n为所有字符串中字符数量的总和（字典树查找法）
