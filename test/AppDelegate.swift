@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  test
 //
-//  Created by Jialin Chen on 2019/5/9.
-//  Copyright © 2019年 Jialin Chen. All rights reserved.
+//  Created by  on 2019/5/9.
+//  Copyright © 2019年 . All rights reserved.
 //
 
 import UIKit
@@ -12,10 +12,13 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let tintColor =  UIColor(red: 242/255, green: 71/255, blue: 63/255, alpha: 1)
+    var backgroundSessionCompletionHandler: (() -> Void)?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        customizeAppearance()
         return true
     }
 
@@ -42,5 +45,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
+        // save the provided completionHandler as a variable in your app delegate for later use
+        backgroundSessionCompletionHandler = completionHandler
+    }
+    
+    // MARK - App Theme Customization
+    
+    fileprivate func customizeAppearance() {
+        window?.tintColor = tintColor
+        UISearchBar.appearance().barTintColor = tintColor
+        UINavigationBar.appearance().barTintColor = tintColor
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+    }
 }
 
