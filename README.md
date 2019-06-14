@@ -1,5 +1,5 @@
 # test
-#----------Alogrithm文件夹----------
+#----------Alogrithm文件夹----------#
 1、二叉树的构建与遍历
 GeneralTree.swift
 
@@ -18,10 +18,10 @@ SortSummary.swift
 Algorithm.swift
 
 
-#----------CodeReview文件夹----------
+#----------CodeReview文件夹----------#
 代码重构规则示例
 
-#----------单元测试----------
+#----------单元测试----------#
 1、testTests文件夹（XCTest框架及三方框架）
     testTests.swift-----三方框架Quick+Nimble，movies文件夹是SUT
     ProjectTests.swift-----XCTest框架的简单使用,model文件夹是SUT
