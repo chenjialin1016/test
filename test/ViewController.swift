@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import OHHTTPStubs
+import Alamofire
+import SwiftyJSON
 
 
 
 class ViewController: UIViewController {
+    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var kifBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,226 +37,118 @@ class ViewController: UIViewController {
         binaryTree.preOrder()
         
         //算法调用
-        self.algorithmTest()
+        algorithmTest()
         
         //排序
-        self.sortTest()
+        sortTest()
         
         //算法排序类调用
 //        self.sortClassTest()
         
         //重构规则
-        self.codeReviewTest()
+        codeReviewTest()
+        
+        //初始化ohhttp
+        self.initOHHTTP()
+        
+        
     }
-    //MARK:---------leetcode算法调用
-    func algorithmTest(){
-        let nums = [-1, 2, 1, -4]
-        let result = Algorithm.threeSumClosest(nums, 1)
-        print("result \(result)")
+
+    //MARK:---------action
+    
+    func initOHHTTP(){
         
-        //有效括号
-        print("result \(Algorithm.isValid("()"))")
-        print("result \(Algorithm.isValid("()[]{}"))")
-        print("result \(Algorithm.isValid("(]"))")
-        print("result \(Algorithm.isValid("([)]"))")
+        kifBtn.accessibilityLabel = "KIF"
         
-        //合并两个有序链表
-        var node1 = ListNode(1)
-        let node2 = ListNode(2)
-        let node3 = ListNode(4)
-        node1.next = node2
-        node2.next = node3
-        let node4 = ListNode(1)
-        let node5 = ListNode(3)
-        let node6 = ListNode(4)
-        node4.next = node5
-        node5.next = node6
-//        var node = Algorithm.mergeTwoLists(node1, node4)
-//        var array : [Int] = [Int]()
-//        while node != nil {
-//            array.append((node?.val)!)
-//            node = node?.next
-//        }
-//        print("result ", array)
+        //返回的数组
         
-//        var node11 = Algorithm.mergeTwoLists1(node1, node4)
-//        var array11 : [Int] = [Int]()
-//        while node11 != nil {
-//            array11.append((node11?.val)!)
-//            node11 = node11?.next
-//        }
-//        print("result ", array11)
-        
-        let node7 = ListNode(2)
-        let node8 = ListNode(6)
-        node7.next = node8
-        let node9 = ListNode(1)
-        let node10 = ListNode(4)
-        let node11 = ListNode(5)
-        node9.next = node10
-        node10.next = node11
-        var nodeArr = [node9, node4,node7]
-        var node22 = Algorithm.mergeKLists(nodeArr)
-//        var node22 = Algorithm.mergeKLists2(nodeArr)
-        var array22 : [Int] = [Int]()
-        while node22 != nil {
-            array22.append((node22?.val)!)
-            node22 = node22?.next
+        OHHTTPStubs.stubRequests(passingTest: { (request) -> Bool in
+            return request.url?.host == "mywebservice.com"
+        }) { (request) -> OHHTTPStubsResponse in
+            let array = ["hello", "world"]
+            return OHHTTPStubsResponse.init(jsonObject: array, statusCode: 200, headers: nil)
         }
-        print("result ", array22)
+         
         
+        //返回json文件内容
+        /*
+        OHHTTPStubs.stubRequests(passingTest: { (request) -> Bool in
+            return request.url?.host == "mywebservice.com"
+        }) { (request) -> OHHTTPStubsResponse in
+            let stubPath = OHPathForFile("abbaData.json", type(of: self))
+            return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
+        }
+        */
         
-        //删除排序数组中的重复项
-        var nums1 = [1, 1, 2]
-        var nums2 = [0, 0, 1, 1, 1, 2, 2, 3, 3 ,4]
-//        print("result \(Algorithm.removeDuplicates(&nums1))")
-//        print("result \(Algorithm.removeDuplicates(&nums2))")
-        print("result \(Algorithm.removeDuplicates1(&nums1))")
-        print("result \(Algorithm.removeDuplicates1(&nums2))")
-        print("\n")
+        //可以模拟慢网络情况，给OHHTTPStubsResponse设置requestTime或者responseTime
+        /*
+         responseTime 可以指定具体的数值 例如3.0
+         你也可以用枚举值来定义responseTime
+         
+         OHHTTPStubsDownloadSpeedGPRS   =    -7 =    7 KB/s =    56 kbps
+         OHHTTPStubsDownloadSpeedEDGE   =   -16 =   16 KB/s =   128 kbps
+         OHHTTPStubsDownloadSpeed3G     =  -400 =  400 KB/s =  3200 kbps
+         OHHTTPStubsDownloadSpeed3GPlus =  -900 =  900 KB/s =  7200 kbps
+         OHHTTPStubsDownloadSpeedWifi   = -1500 = 1500 KB/s = 12000 kbps
+         */
+        /*
+        OHHTTPStubs.stubRequests(passingTest: { (request) -> Bool in
+            return request.url?.host == "mywebservice.com"
+        }) { (request) -> OHHTTPStubsResponse in
+            let stubPath = OHPathForFile("abbaData.json", type(of: self))
+            return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"]).requestTime(1.0, responseTime: OHHTTPStubsDownloadSpeedWifi)
+        }
+        */
         
-        //搜索旋转排序数组
-        print("搜索旋转排序数组")
-        var num3 = [4, 5, 6, 7, 0, 1, 2]
-        print(Algorithm.search(num3, 0), Algorithm.search(num3, 3))
-        print(Algorithm.search1(num3, 0), Algorithm.search1(num3, 3))
-        print(Algorithm.search2(num3, 0), Algorithm.search2(num3, 3))
-        print(Algorithm.search3(num3, 0), Algorithm.search3(num3, 3))
-        print("\n")
-        
-        //字符串相乘
-        print("字符串相乘")
-        print(Algorithm.multiply("2", "3"))
-        print(Algorithm.multiply("123", "456"))
-        print(Algorithm.multiply2("2", "3"))
-        print(Algorithm.multiply2("123", "456"))
-        print("\n")
-        
-        //全排列
-//        print("全排列")
-//        print(Algorithm.permute([1, 2, 3]))
-//        print("\n")
-        
+        //模拟网络错误情况
+        /*
+        OHHTTPStubs.stubRequests(passingTest: { (request) -> Bool in
+            return request.url?.host == "mywebservice.com"
+        }) { (request) -> OHHTTPStubsResponse in
+            let error : NSError = NSError.init(domain: NSURLErrorDomain, code: 500, userInfo: ["describe":"netwoek is error"])
+            return OHHTTPStubsResponse.init(error: error)
+        }
+        */
     }
-    //MARK:---------排序方法总结调用
-    //排序
-    func sortTest(){
-        
-        //冒泡
-        print("冒泡")
-        let array = [1,3,6,9,0,5,2,4,8,7]
-        SortSummary.bubbleSort(array)
-        SortSummary.bubbleSort1(array)
-        SortSummary.bubbleSort2(array)
-        print("\n")
-        
-        //选择
-        print("选择")
-        let array2 = [8, 5, 2, 6, 9, 3, 1, 4, 0, 7]
-        SortSummary.chooseSort(array2)
-        print("\n")
-        
-        //插入
-        print("插入")
-        let array3 = [8, 3, 5, 4, 6]
-        SortSummary.insertSort(array3)
-        SortSummary.insertSort1(array3)
-        SortSummary.insertSort2(array3)
-        SortSummary.insertSort3(array3, <)
-        //insertSort3(array3){$0<$1}等同于insertSort3(array3, <)
-        SortSummary.insertSort3(array3){$0<$1}
-        SortSummary.insertSort3(array3, >)
-        print("\n")
-        
-        //堆
-        print("堆")
-        var array4 = [62, 88, 58, 47, 62, 35, 73, 51, 99, 37, 93]
-        SortSummary.heapSort(&array4)
-        print(array4,"\n")
-        
-        //归并
-        print("归并")
-        var array5 = [2, 1, 5, 4, 9]
-//        array5 = SortSummary.mergeSort(array5)
-        array5 = SortSummary.mergeSort1(array5)
-        print(array5)
-        array5 = SortSummary.mergeSortBottomUp(array5, <)
-        print(array5,"\n")
-        
-        //快速
-        print("快速")
-        var array6 = [5, 7, 1, 8, 4]
-        SortSummary.quickSort(&array6, 0, array6.count-1)
-        print(array6,"\n")
-        
-        //希尔
-        print("希尔")
-        var array7 = [49, 38, 65, 97, 26, 13, 27, 49, 55, 4]
-        SortSummary.shellSort(&array7)
-        print(array7,"\n")
-        
-        //桶
-        print("桶")
-        var array8 = [1,34,66,90,99,34,56,2,3,47,66,99]
-        array8 = SortSummary.bucketSort(array8, 100)
-        print(array8,"\n")
-        
-        //基排
-        print("基排")
-        var array9 = [62, 88, 58, 47, 62, 35, 73, 51, 99, 37, 93]
-        SortSummary.radixSort(&array9)
-        print(array9,"\n")
-        
-        //实例
-        print("实例")
-        var array10 = [MeetingTime.init(1, 3), MeetingTime.init(5, 6), MeetingTime.init(4, 7), MeetingTime.init(2, 3)]
-        array10 = SortSummary.meetingTimeMerge(array10)
-        for i in array10 {
-            print(i.start,i.end,"\n")
+    @IBAction func StubDataClick(_ sender: Any) {
+        Alamofire.request("http://mywebservice.com", method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { (respons) in
+            print("response: ", respons.response as Any)
+            print("result: ",respons.result)
+
+            switch respons.result{
+            case .success(let value):
+                let json = JSON(value)
+                 self.textView.text = json.rawString()
+                print("JSON: ", json)
+            case .failure(let error):
+                 print("error: ",error)
+                 self.textView.text = (error as! NSError).description
+            }
+
         }
         
+        //官方请求框架
+//        NSURLConnection.sendAsynchronousRequest(URLRequest(url: URL(string: "http://mywebservice.com")!), queue: OperationQueue.main) { (_, data, _) in
+//            if let receivedData = data, let receivedText = NSString(data: receivedData, encoding: String.Encoding.ascii.rawValue) {
+//                print("response : ", receivedText)
+//                self.textView.text = receivedText as String
+//            }
+//        }
+        
+    }
+    @IBAction func dataReviewDuplicateObservedDataClick(_ sender: Any) {
+        print("dataReviewDuplicateObservedDataClick")
+        //重构前
+        let addVC : AddViewController = AddViewController()
+        
+//        self.navigationController?.pushViewController(addVC, animated: true)
+        
+        //重构后
+        let addReviewVC : AddReviewViewController = AddReviewViewController()
+        self.navigationController?.pushViewController(addReviewVC, animated: true)
     }
     
-   //MARK:---------排序类调用
-    func sortClassTest(){
-       commonSort(BubbleSort())
-        commonSort(ChooseSort())
-        commonSort(InsertSort())
-        commonSort(HeapSort())
-        commonSort(MergeSort())
-        commonSort(QuickSort())
-        commonSort(ShellSort())
-        commonSort(BucketSort())
-        commonSort(RadixSort())
-    }
-    private func commonSort(_ sortObject : SortType){
-        let list : Array<Int> = [62, 88, 58, 47, 62, 35, 73, 51, 99, 37, 93]
-        let sortList = sortObject.sort(list)
-        print(sortList)
-        print("\n")
-    }
     
-    //MARK:---------重构规则
-    func codeReviewTest(){
-        
-        //函数重构
-        methodReviewTest()
-        
-        //类重构
-        classReviewTest()
-        
-        //数据重构
-        dataReviewTest()
-        
-        //条件表达式重构
-        conditionalExpressionReviewTest()
-        
-        //继承关系重构
-        extendsReviewTest()
-        
-        //规则完成案例
-        
-    }
     
     /*===========================================================================================*/
     //5、寻找字符串数组中最长公共前缀 --找到所有字符串中的公共前缀的最大长度--O(S⋅log(n)) n为所有字符串中字符数量的总和（字典树查找法）

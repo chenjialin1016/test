@@ -1,24 +1,50 @@
 PODS:
   - Alamofire (4.0.1)
+  - KIF (3.7.7):
+    - KIF/Core (= 3.7.7)
+  - KIF/Core (3.7.7)
   - Nimble (5.0.0)
+  - OHHTTPStubs/Core (8.0.0)
+  - OHHTTPStubs/Default (8.0.0):
+    - OHHTTPStubs/Core
+    - OHHTTPStubs/JSON
+    - OHHTTPStubs/NSURLSession
+    - OHHTTPStubs/OHPathHelpers
+  - OHHTTPStubs/JSON (8.0.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/NSURLSession (8.0.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (8.0.0)
+  - OHHTTPStubs/Swift (8.0.0):
+    - OHHTTPStubs/Default
   - Quick (1.0.0)
+  - SwiftyJSON (3.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0.1)
+  - KIF (~> 3.0)
   - Nimble (~> 5.0.0)
+  - OHHTTPStubs/Swift
   - Quick (~> 1.0.0)
+  - SwiftyJSON (~> 3.0.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - KIF
     - Nimble
+    - OHHTTPStubs
     - Quick
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  KIF: 6f525b18d4cca3d6445f3c5d683294e9157bd3f4
   Nimble: 56fc9f5020effa2206de22c3dd910f4fb011b92f
+  OHHTTPStubs: 9cbce6364bec557cc3439aa6bb7514670d780881
   Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
+  SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
 
-PODFILE CHECKSUM: e5d153fe5d6d9fb060523de0d085833268de6fea
+PODFILE CHECKSUM: 81e42e7e26f7ec456d6b98eb4395f3a9d4a1dbb3
 
 COCOAPODS: 1.5.3

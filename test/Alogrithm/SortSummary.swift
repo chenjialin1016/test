@@ -792,3 +792,103 @@ public class MeetingTime{
         self.end = end
     }
 }
+
+
+
+//MARK:---------排序方法总结调用
+//排序
+func sortTest(){
+    
+    //冒泡
+    print("冒泡")
+    let array = [1,3,6,9,0,5,2,4,8,7]
+    SortSummary.bubbleSort(array)
+    SortSummary.bubbleSort1(array)
+    SortSummary.bubbleSort2(array)
+    print("\n")
+    
+    //选择
+    print("选择")
+    let array2 = [8, 5, 2, 6, 9, 3, 1, 4, 0, 7]
+    SortSummary.chooseSort(array2)
+    print("\n")
+    
+    //插入
+    print("插入")
+    let array3 = [8, 3, 5, 4, 6]
+    SortSummary.insertSort(array3)
+    SortSummary.insertSort1(array3)
+    SortSummary.insertSort2(array3)
+    SortSummary.insertSort3(array3, <)
+    //insertSort3(array3){$0<$1}等同于insertSort3(array3, <)
+    SortSummary.insertSort3(array3){$0<$1}
+    SortSummary.insertSort3(array3, >)
+    print("\n")
+    
+    //堆
+    print("堆")
+    var array4 = [62, 88, 58, 47, 62, 35, 73, 51, 99, 37, 93]
+    SortSummary.heapSort(&array4)
+    print(array4,"\n")
+    
+    //归并
+    print("归并")
+    var array5 = [2, 1, 5, 4, 9]
+    //        array5 = SortSummary.mergeSort(array5)
+    array5 = SortSummary.mergeSort1(array5)
+    print(array5)
+    array5 = SortSummary.mergeSortBottomUp(array5, <)
+    print(array5,"\n")
+    
+    //快速
+    print("快速")
+    var array6 = [5, 7, 1, 8, 4]
+    SortSummary.quickSort(&array6, 0, array6.count-1)
+    print(array6,"\n")
+    
+    //希尔
+    print("希尔")
+    var array7 = [49, 38, 65, 97, 26, 13, 27, 49, 55, 4]
+    SortSummary.shellSort(&array7)
+    print(array7,"\n")
+    
+    //桶
+    print("桶")
+    var array8 = [1,34,66,90,99,34,56,2,3,47,66,99]
+    array8 = SortSummary.bucketSort(array8, 100)
+    print(array8,"\n")
+    
+    //基排
+    print("基排")
+    var array9 = [62, 88, 58, 47, 62, 35, 73, 51, 99, 37, 93]
+    SortSummary.radixSort(&array9)
+    print(array9,"\n")
+    
+    //实例
+    print("实例")
+    var array10 = [MeetingTime.init(1, 3), MeetingTime.init(5, 6), MeetingTime.init(4, 7), MeetingTime.init(2, 3)]
+    array10 = SortSummary.meetingTimeMerge(array10)
+    for i in array10 {
+        print(i.start,i.end,"\n")
+    }
+    
+}
+
+//MARK:---------排序类调用
+func sortClassTest(){
+    commonSort(BubbleSort())
+    commonSort(ChooseSort())
+    commonSort(InsertSort())
+    commonSort(HeapSort())
+    commonSort(MergeSort())
+    commonSort(QuickSort())
+    commonSort(ShellSort())
+    commonSort(BucketSort())
+    commonSort(RadixSort())
+}
+private func commonSort(_ sortObject : SortType){
+    let list : Array<Int> = [62, 88, 58, 47, 62, 35, 73, 51, 99, 37, 93]
+    let sortList = sortObject.sort(list)
+    print(sortList)
+    print("\n")
+}

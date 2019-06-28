@@ -11,6 +11,7 @@
 
 import XCTest
 import Alamofire
+import OHHTTPStubs
 
 @testable import test
 
@@ -24,6 +25,14 @@ class NetworkAsyncTests: XCTestCase {
         super.tearDown()
     }
 
+    //拦截域名为mywebservice.com的http请求，并返回一个数组对象。
+    func testStubResponse(){
+        
+        
+       
+        
+    }
+    
     func testAsynNetworkTest() {
         let networkExpection = expectation(description: "networkDownSuccess")
         Alamofire.request("http://www.httpbin.org/get?key=Xctest", method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { (respons) in

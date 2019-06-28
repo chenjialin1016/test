@@ -32,22 +32,27 @@ class testUITests: XCTestCase {
 
     func testUI(){
         
-//        let app = XCUIApplication()
-        let tddButton = app.buttons["TDD驱动测试界面"]
-        tddButton.tap()
         
-        let backButton = app.navigationBars["test.MoviesTableView"].buttons["Back"]
-        backButton.tap()
-        tddButton.tap()
-        backButton.tap()
-        
-        
+        //        let app = XCUIApplication()
+
+        XCUIApplication().buttons["KIF"].tap()
+
+        let app = XCUIApplication()
+        app.textFields["UserName"].tap()
+
+        let passwordTextField = app.textFields["Password"]
+        passwordTextField.tap()
+        passwordTextField.tap()
+        app.buttons["login"].tap()
+
     }
+//
+//    /*
+//     报错：The bundle “testUITests” couldn’t be loaded because it is damaged or missing necessary resources. Try reinstalling the bundle.
+//     原因：由于在podfile中导入了三方框架，注释掉就可以了
+//     https://stackoverflow.com/questions/40480503/the-bundle-uitests-couldn-t-be-loaded-because-it-is-damaged-or-missing-necessary
+//     */
     
-    /*
-     报错：The bundle “testUITests” couldn’t be loaded because it is damaged or missing necessary resources. Try reinstalling the bundle.
-     原因：由于在podfile中导入了三方框架，注释掉就可以了
-     https://stackoverflow.com/questions/40480503/the-bundle-uitests-couldn-t-be-loaded-because-it-is-damaged-or-missing-necessary
-     */
 
 }
+
