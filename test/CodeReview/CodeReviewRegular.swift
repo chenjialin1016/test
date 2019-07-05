@@ -37,7 +37,7 @@ func codeReviewTest(){
     extendsReviewTest()
     
     //规则完成案例
-    
+    completeCaseTest()
 }
 
 //MARK:-----------1、函数重构规则-----------
@@ -280,3 +280,24 @@ func extendsReviewTest(){
 
 //MARK:-----------6、代码冲能够完整案例-----------
 //https://www.cnblogs.com/ludashi/p/5279459.html
+func completeCaseTest(){
+    //创建用户
+    let customer = CompleteCustomer("cjl")
+    
+    //创建电影
+    let regularMovie : CompleteMovie = CompleteMovie("《老炮儿》", CompleteMovie.REGULAR)
+    let newMovie : CompleteMovie = CompleteMovie("《福尔摩斯》", CompleteMovie.NEW_RELESE)
+    let childrenMovie : CompleteMovie = CompleteMovie("《葫芦娃》", CompleteMovie.CHILDRENS)
+    
+    //创建租赁数据
+    let rental1 = CompleteRental(regularMovie, daysRented: 5)
+    let rental2 = CompleteRental(newMovie, daysRented: 8)
+    let rental3 = CompleteRental(childrenMovie, daysRented: 2)
+    
+    customer.rentals.append(rental1)
+    customer.rentals.append(rental2)
+    customer.rentals.append(rental3)
+    
+    let result = customer.statement()
+    print(result)
+}

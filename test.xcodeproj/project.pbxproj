@@ -39,6 +39,15 @@
 		0A1E6FD122C0C9DB00AEFB5B /* AddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A1E6FCF22C0C9DB00AEFB5B /* AddViewController.xib */; };
 		0A1E6FD522C0CA4C00AEFB5B /* AddReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E6FD322C0CA4C00AEFB5B /* AddReviewViewController.swift */; };
 		0A1E6FD622C0CA4C00AEFB5B /* AddReviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A1E6FD422C0CA4C00AEFB5B /* AddReviewViewController.xib */; };
+		0A23BF9722CAFF450050664A /* 策略模式.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A23BF9622CAFF450050664A /* 策略模式.png */; };
+		0A23BF9922CB01D30050664A /* StrategyPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BF9822CB01D30050664A /* StrategyPattern.swift */; };
+		0A23BF9B22CB30110050664A /* ObservePattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BF9A22CB30110050664A /* ObservePattern.swift */; };
+		0A23BF9D22CC8A830050664A /* 观察者模式.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A23BF9C22CC8A830050664A /* 观察者模式.png */; };
+		0A23BF9F22CCAC180050664A /* Foundation自带的通知模式.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A23BF9E22CCAC180050664A /* Foundation自带的通知模式.png */; };
+		0A23BFA122CCAC270050664A /* 自定义通知中心.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A23BFA022CCAC270050664A /* 自定义通知中心.png */; };
+		0A23BFA322CE05DF0050664A /* DecoratorPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BFA222CE05DF0050664A /* DecoratorPattern.swift */; };
+		0A23C1A322CF432B0050664A /* 装饰者模式.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A23C1A222CF432B0050664A /* 装饰者模式.png */; };
+		0A23C1A522CF4A790050664A /* 装饰者模式函数调用图示.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A23C1A422CF4A790050664A /* 装饰者模式函数调用图示.png */; };
 		0A370F4A2296A3EE00EF9AC2 /* GeneralTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370F492296A3ED00EF9AC2 /* GeneralTree.swift */; };
 		0A370F4C229787A100EF9AC2 /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370F4B229787A100EF9AC2 /* BinaryTree.swift */; };
 		0A370F4E2297CCFC00EF9AC2 /* Algorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370F4D2297CCFC00EF9AC2 /* Algorithm.swift */; };
@@ -56,6 +65,8 @@
 		0A504CFC22A7B0A1004C2F2E /* DataReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A504CFB22A7B0A1004C2F2E /* DataReview.swift */; };
 		0A57477522C4CB0000A8BA6D /* ConditionReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A57477422C4CB0000A8BA6D /* ConditionReview.swift */; };
 		0A57477722C4CB1F00A8BA6D /* ExtendsReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A57477622C4CB1F00A8BA6D /* ExtendsReview.swift */; };
+		0A57477922C9EBFF00A8BA6D /* CompleteCaseReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A57477822C9EBFF00A8BA6D /* CompleteCaseReview.swift */; };
+		0A57477B22CA100300A8BA6D /* DesignPatterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A57477A22CA100300A8BA6D /* DesignPatterns.swift */; };
 		0AC6A79722B9E96500C98F79 /* MockDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC6A79622B9E96500C98F79 /* MockDemoTests.m */; };
 		0AC6A79922B9E9EE00C98F79 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC6A79822B9E9EE00C98F79 /* Person.swift */; };
 		0AD617AF22B736A70007B7E1 /* test1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD617AE22B736A70007B7E1 /* test1UITests.swift */; };
@@ -161,6 +172,15 @@
 		0A1E6FCF22C0C9DB00AEFB5B /* AddViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddViewController.xib; sourceTree = "<group>"; };
 		0A1E6FD322C0CA4C00AEFB5B /* AddReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewViewController.swift; sourceTree = "<group>"; };
 		0A1E6FD422C0CA4C00AEFB5B /* AddReviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddReviewViewController.xib; sourceTree = "<group>"; };
+		0A23BF9622CAFF450050664A /* 策略模式.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "策略模式.png"; sourceTree = "<group>"; };
+		0A23BF9822CB01D30050664A /* StrategyPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyPattern.swift; sourceTree = "<group>"; };
+		0A23BF9A22CB30110050664A /* ObservePattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservePattern.swift; sourceTree = "<group>"; };
+		0A23BF9C22CC8A830050664A /* 观察者模式.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "观察者模式.png"; sourceTree = "<group>"; };
+		0A23BF9E22CCAC180050664A /* Foundation自带的通知模式.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Foundation自带的通知模式.png"; sourceTree = "<group>"; };
+		0A23BFA022CCAC270050664A /* 自定义通知中心.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "自定义通知中心.png"; sourceTree = "<group>"; };
+		0A23BFA222CE05DF0050664A /* DecoratorPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoratorPattern.swift; sourceTree = "<group>"; };
+		0A23C1A222CF432B0050664A /* 装饰者模式.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "装饰者模式.png"; sourceTree = "<group>"; };
+		0A23C1A422CF4A790050664A /* 装饰者模式函数调用图示.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "装饰者模式函数调用图示.png"; sourceTree = "<group>"; };
 		0A370F492296A3ED00EF9AC2 /* GeneralTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTree.swift; sourceTree = "<group>"; };
 		0A370F4B229787A100EF9AC2 /* BinaryTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryTree.swift; sourceTree = "<group>"; };
 		0A370F4D2297CCFC00EF9AC2 /* Algorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm.swift; sourceTree = "<group>"; };
@@ -181,6 +201,8 @@
 		0A504CFB22A7B0A1004C2F2E /* DataReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataReview.swift; sourceTree = "<group>"; };
 		0A57477422C4CB0000A8BA6D /* ConditionReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionReview.swift; sourceTree = "<group>"; };
 		0A57477622C4CB1F00A8BA6D /* ExtendsReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendsReview.swift; sourceTree = "<group>"; };
+		0A57477822C9EBFF00A8BA6D /* CompleteCaseReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteCaseReview.swift; sourceTree = "<group>"; };
+		0A57477A22CA100300A8BA6D /* DesignPatterns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignPatterns.swift; sourceTree = "<group>"; };
 		0AC6A79622B9E96500C98F79 /* MockDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MockDemoTests.m; sourceTree = "<group>"; };
 		0AC6A79822B9E9EE00C98F79 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		0AC6A79D22BA106F00C98F79 /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
@@ -333,6 +355,7 @@
 				0A0CBD7D2283BF1800DFBB82 /* AppDelegate.swift */,
 				0A0CBD7F2283BF1800DFBB82 /* ViewController.swift */,
 				0A0F218922B2206B0010D70C /* ProjectClass.swift */,
+				0A57477C22CA100A00A8BA6D /* DesignPatterns */,
 				0AD617BF22B774CB0007B7E1 /* KIFDemo */,
 				0A0F21D722B39F450010D70C /* Movies */,
 				0A0F21C722B392D30010D70C /* BullsEyeGame */,
@@ -397,6 +420,7 @@
 				0A504CFB22A7B0A1004C2F2E /* DataReview.swift */,
 				0A57477422C4CB0000A8BA6D /* ConditionReview.swift */,
 				0A57477622C4CB1F00A8BA6D /* ExtendsReview.swift */,
+				0A57477822C9EBFF00A8BA6D /* CompleteCaseReview.swift */,
 				0A1E6FD222C0C9E800AEFB5B /* ReviewUIDemo */,
 			);
 			path = CodeReview;
@@ -474,6 +498,23 @@
 				0A488C1C22B9E67A00CA6BA7 /* OCMockTests-Bridging-Header.h */,
 			);
 			path = OCMockTests;
+			sourceTree = "<group>";
+		};
+		0A57477C22CA100A00A8BA6D /* DesignPatterns */ = {
+			isa = PBXGroup;
+			children = (
+				0A57477A22CA100300A8BA6D /* DesignPatterns.swift */,
+				0A23BF9822CB01D30050664A /* StrategyPattern.swift */,
+				0A23BF9622CAFF450050664A /* 策略模式.png */,
+				0A23BF9A22CB30110050664A /* ObservePattern.swift */,
+				0A23BF9C22CC8A830050664A /* 观察者模式.png */,
+				0A23BF9E22CCAC180050664A /* Foundation自带的通知模式.png */,
+				0A23BFA022CCAC270050664A /* 自定义通知中心.png */,
+				0A23BFA222CE05DF0050664A /* DecoratorPattern.swift */,
+				0A23C1A222CF432B0050664A /* 装饰者模式.png */,
+				0A23C1A422CF4A790050664A /* 装饰者模式函数调用图示.png */,
+			);
+			path = DesignPatterns;
 			sourceTree = "<group>";
 		};
 		0AC6A79C22BA106F00C98F79 /* OCMock */ = {
@@ -735,7 +776,13 @@
 				0A1E6FD622C0CA4C00AEFB5B /* AddReviewViewController.xib in Resources */,
 				0A1E6FD122C0C9DB00AEFB5B /* AddViewController.xib in Resources */,
 				0A0CBD852283BF1B00DFBB82 /* Assets.xcassets in Resources */,
+				0A23C1A522CF4A790050664A /* 装饰者模式函数调用图示.png in Resources */,
+				0A23BF9722CAFF450050664A /* 策略模式.png in Resources */,
+				0A23C1A322CF432B0050664A /* 装饰者模式.png in Resources */,
+				0A23BFA122CCAC270050664A /* 自定义通知中心.png in Resources */,
 				0A0CBD832283BF1800DFBB82 /* Main.storyboard in Resources */,
+				0A23BF9F22CCAC180050664A /* Foundation自带的通知模式.png in Resources */,
+				0A23BF9D22CC8A830050664A /* 观察者模式.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -945,6 +992,7 @@
 				0A0F21A622B3879E0010D70C /* Track.swift in Sources */,
 				0A0F21C622B392970010D70C /* BullsEyeGameViewController.swift in Sources */,
 				0A4C31C4229BA10F005C1D1E /* SearchSummary.swift in Sources */,
+				0A57477922C9EBFF00A8BA6D /* CompleteCaseReview.swift in Sources */,
 				0A504CFC22A7B0A1004C2F2E /* DataReview.swift in Sources */,
 				0A504CFA22A65E51004C2F2E /* ClassReview.swift in Sources */,
 				0A57477722C4CB1F00A8BA6D /* ExtendsReview.swift in Sources */,
@@ -954,12 +1002,16 @@
 				0AD617BE22B774AA0007B7E1 /* Scene1ViewController.swift in Sources */,
 				0A0F21A522B3879E0010D70C /* Download.swift in Sources */,
 				0A0F21A122B387800010D70C /* TrackCell.swift in Sources */,
+				0A23BFA322CE05DF0050664A /* DecoratorPattern.swift in Sources */,
 				0A370F4C229787A100EF9AC2 /* BinaryTree.swift in Sources */,
 				0A370F4A2296A3EE00EF9AC2 /* GeneralTree.swift in Sources */,
 				0A0CBD802283BF1800DFBB82 /* ViewController.swift in Sources */,
 				0A57477522C4CB0000A8BA6D /* ConditionReview.swift in Sources */,
 				0A0F219022B3753C0010D70C /* BullsEyeGame.swift in Sources */,
+				0A57477B22CA100300A8BA6D /* DesignPatterns.swift in Sources */,
 				0AD617BD22B774AA0007B7E1 /* Scene2ViewController.swift in Sources */,
+				0A23BF9922CB01D30050664A /* StrategyPattern.swift in Sources */,
+				0A23BF9B22CB30110050664A /* ObservePattern.swift in Sources */,
 				0A0CBD7E2283BF1800DFBB82 /* AppDelegate.swift in Sources */,
 				0A0F218A22B2206B0010D70C /* ProjectClass.swift in Sources */,
 				0AD617C122B775B50007B7E1 /* LoginViewController.swift in Sources */,

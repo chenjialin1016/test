@@ -1435,7 +1435,7 @@ class Algorithm{
     //MARK:-----------子集
     class func subsets(_ nums: [Int]) -> [[Int]] {
         /*
-         二进制位
+         二进制位 16ms
          集合的每个元素，都有可以选或不选，用二进制和位运算，可以很好的表示
          */
         var res : [[Int]] = [[Int]]()
@@ -1452,7 +1452,7 @@ class Algorithm{
     }
     class func subsets1(_ nums: [Int]) -> [[Int]] {
         /*
-         逐个枚举
+         逐个枚举 16ms
          逐个枚举，空集的幂集只有空集，每增加一个元素，让之前幂集中的每个集合，追加这个元素，就是新增的子集
          */
         //循环枚举
@@ -1472,7 +1472,7 @@ class Algorithm{
     }
     class func subsets2(_ nums: [Int]) -> [[Int]] {
         /*
-         递归枚举
+         递归枚举 20ms
          */
         var res : [[Int]] = [[Int]]()
         res.append([])
@@ -1495,7 +1495,7 @@ class Algorithm{
     }
     class func subsets3(_ nums: [Int]) -> [[Int]] {
         /*
-         回溯
+         回溯 12ms
          集合中每个元素的选和不选，构成了一个满二叉状态树，比如，左子树是不选，右子树是选，从根节点、到叶子节点的所有路径，构成了所有子集。通过回溯，跳过一些节点
          */
         var res : [[Int]] = [[Int]]()
@@ -1515,7 +1515,7 @@ class Algorithm{
     }
     class func subsets4(_ nums: [Int]) -> [[Int]] {
         /*
-         迭代一
+         迭代一 36ms
          解法一的迭代法，是直接从结果上进行分类，将子数组的长度分为长度是 1 的，2 的 .... n 的。
          想找出数组长度 1 的所有解，然后再在长度为 1 的所有解上加 1 个数字变成长度为 2 的所有解，同样的直到 n。
          第一次循环：     [1]           [2]        [3]
@@ -1541,16 +1541,16 @@ class Algorithm{
                     var newList = [Int](list)
                     newList.append(nums[m])
                     tmp.append(newList)
-                    res.append(newList)
+                    ans.append(newList)
                 }
             }
-            ans=tmp
+            res=tmp
         }
-        return res
+        return ans
     }
     class func subsets5(_ nums: [Int]) -> [[Int]] {
         /*
-         迭代二
+         迭代二 20ms
          我们还可以从条件上入手，先只考虑给定数组的 1 个元素的所有子数组，然后再考虑数组的 2 个元素的所有子数组 ... 最后再考虑数组的 n 个元素的所有子数组。求 k 个元素的所有子数组，只需要在 k - 1 个元素的所有子数组里边加上 nums [ k ] 即可。
                                                     []      -->  初始化空
                                             []      [1]     -->   [1]
@@ -1572,11 +1572,341 @@ class Algorithm{
         }
         return res
     }
-    //MARK:-----------
-    //MARK:-----------
-    //MARK:-----------
-    //MARK:-----------
-    //MARK:-----------
+    //MARK:-----------合并两个有序数组
+    class func merge(_ nums1: inout [Int], _ m: Int, _ nums2: [Int], _ n: Int) {
+        /*
+         合并后排序 20ms
+         */
+        nums1 = [Int](nums1[0..<m])
+        for num in nums2 {
+            nums1.append(num)
+        }
+        nums1 = nums1.sorted()
+        print(nums1)
+    }
+    class func merge1(_ nums1: inout [Int], _ m: Int, _ nums2: [Int], _ n: Int) {
+        /*
+         从前往后排序 O(n) 40ms
+         */
+        if m==0 {
+            nums1 = nums2
+        }
+        var num = [Int]()
+        var newNum1 = [Int](nums1[0..<m])
+        var nums2 : [Int] = nums2
+        while !newNum1.isEmpty && !nums2.isEmpty {
+            if newNum1.first! <= nums2.first!{
+                num.append(newNum1.first!)
+                newNum1.removeFirst()
+            }else{
+                num.append(nums2.first!)
+                nums2.removeFirst()
+            }
+            if newNum1.isEmpty {
+                num.append(contentsOf: nums2)
+                nums1 = num
+            }
+            if nums2.isEmpty{
+                num.append(contentsOf: newNum1)
+                nums1 = num
+            }
+        }
+        print(nums1)
+        
+    }
+    class func merge2(_ nums1: inout [Int], _ m: Int, _ nums2: [Int], _ n: Int) {
+        //双指针 从后往前 20ms
+        var p1 = m-1
+        var p2 = n-1
+        var p = m+n-1
+        while p1>=0 && p2>=0 {
+            if  nums1[p1] <= nums2[p2]{
+                nums1[p] = nums2[p2]
+                p2 -= 1
+                p -= 1
+            }else{
+                nums1[p] = nums1[p1]
+                p1 -= 1
+                p -= 1
+                
+            }
+        }
+        while p2 >= 0 {
+            nums1[p] = nums2[p2]
+            p -= 1
+            p2 -= 1
+        }
+    }
+    //MARK:-----------格雷编码
+    class func grayCode(_ n: Int) -> [Int] {
+        /*
+         动态规划：O(2^n)镜射排列 12ms
+         如果知道了 n = 2 的解的话，如果是 { 0, 1, 3, 2}，那么 n = 3 的解就是 { 0, 1, 3, 2, 2 + 4, 3 + 4, 1 + 4, 0 + 4 }，即 { 0 1 3 2 6 7 5 4 }。之前的解直接照搬过来，然后倒序把每个数加上 1 << ( n - 1) 添加到结果中即可。
+         */
+        var gray : [Int] = [Int]()
+        //初始化n=0的解
+        gray.append(0)
+        for i in 0..<n{
+            //要加的数
+            let add : Int = 1 << i
+            //倒序遍历，并且加上一个值添加到结果中
+            var j = gray.count-1
+            while j >= 0{
+                gray.append(gray[j]+add)
+                j -= 1
+            }
+        }
+        return gray
+    }
+    class func grayCode1(_ n: Int) -> [Int] {
+        /*
+         直接推导（直接排列）：16ms
+         由于每添加两个数需要找第一个为 1 的位元，需要 O（n）,O(n2^n)
+         生成格雷码的思路：以二进制为 0 值的格雷码为第零项，第一项改变最右边的位元，第二项改变右起第一个为1的位元的左边位元，第三、四项方法同第一、二项，如此反复，即可排列出n个位元的格雷码。
+         以 n = 3 为例。
+         0 0 0 第零项初始化为 0。
+         0 0 1 第一项改变上一项最右边的位元
+         0 1 1 第二项改变上一项右起第一个为 1 的位元的左边位
+         0 1 0 第三项同第一项，改变上一项最右边的位元
+         1 1 0 第四项同第二项，改变最上一项右起第一个为 1 的位元的左边位
+         1 1 1 第五项同第一项，改变上一项最右边的位元
+         1 0 1 第六项同第二项，改变最上一项右起第一个为 1 的位元的左边位
+         1 0 0 第七项同第一项，改变上一项最右边的位元
+         */
+        var gray : [Int] = [Int]()
+        //初始化n=0的解
+        gray.append(0)
+        var i = 1
+        while i < 1 << n{
+            //得到上一个的值
+            var previous = gray[i-1]
+            //同一项的情况
+            if i%2 == 1 {
+                //和0000001 做异或，使得最右边一位取反
+                previous = previous ^ 1
+                gray.append(previous)
+            //同第二项的情况
+            }else{
+                var temp = previous
+                //寻找右边起第一个为1的位元
+                for j in 0..<n {
+                    if temp&1 == 1 {
+                        //和 00001000000 类似这样的数做异或，使得相应位取反
+                        previous = previous^(1<<(j+1))
+                        gray.append(previous)
+                        break
+                    }
+                    temp = temp>>1
+                }
+            }
+            i += 1
+        }
+        return gray
+    }
+    class func grayCode2(_ n: Int) -> [Int] {
+        /*
+         公式：O(2^n) 20ms
+         二进制转格雷码 G(n)=B(n+1) XOR B(n)
+         利用公式转换即可。即最高位保留，其它位是当前位和它的高一位进行异或操作。
+         */
+        var gray : [Int] = [Int]()
+        var binary = 0
+        while binary < 1 << n {
+            gray.append(binary ^ (binary>>1))
+            binary += 1
+        }
+        return gray
+    }
+    //MARK:-----------二叉树的最大深度
+    class func maxDepth(_ root: TreeNode?) -> Int {
+        /*
+         递归：深度优先搜索DFS O(n) 40ms
+         */
+        guard root != nil else{
+            return 0
+        }
+        let left_height = maxDepth(root?.left)
+        let right_height = maxDepth(root?.right)
+        return max(left_height, right_height)+1
+    }
+    class func maxDepth1(_ root: TreeNode?) -> Int {
+        /*
+         迭代：68ms
+         利用栈将递归转换为迭代，使用dfs策略访问每个节点，同时在每次访问时更新最大深度
+         O(n)
+         从包含根结点且相应深度为 1 的栈开始。然后我们继续迭代：将当前结点弹出栈并推入子结点。每一步都会更新深度。
+         */
+        var stack : [(TreeNode?,Int)] = []
+        if root != nil {
+            stack.append((root,1))
+        }else{
+            return 0
+        }
+        var depth = 1
+        while !stack.isEmpty {
+            let current = stack.removeFirst()
+            let root : TreeNode? = current.0
+            let current_depth = current.1
+            if root != nil{
+                depth = max(depth, current_depth)
+                stack.append((root?.left, current_depth+1))
+                stack.append((root?.right, current_depth+1))
+            }
+        }
+        return depth
+    }
+    //MARK:-----------买卖股票的最佳时机
+    class func maxProfit(_ prices: [Int]) -> Int {
+        /*
+         暴力法：O(n^2) 3660ms
+         我们需要找出给定数组中两个数字之间的最大差值（即，最大利润）。此外，第二个数字（卖出价格）必须大于第一个数字（买入价格）。
+         形式上，对于每组i 和j（其中j>i）我们需要找出max(prices[j]−prices[i])。
+         */
+        if prices.count==0 || prices.count==1{
+            return 0
+        }
+        var maxprofit : Int = 0
+        for i in 0..<prices.count-1 {
+            for j in (i+1)..<prices.count{
+                let profit = prices[j]-prices[i]
+                if profit > maxprofit {
+                    maxprofit = profit
+                }
+            }
+        }
+        return maxprofit
+    }
+    class func maxProfit1(_ prices: [Int]) -> Int {
+        /*
+         一次遍历：O(n)  56ms
+         需要找到最小的谷之后的最大的峰。 我们可以维持两个变量——minprice 和 maxprofit，它们分别对应迄今为止所得到的最小的谷值和最大的利润（卖出价格与最低价格之间的最大差值）。
+         */
+        var minprice = Int.max
+        var maxprofit : Int = 0
+        for i in 0..<prices.count {
+            if prices[i] < minprice{
+                minprice = prices[i]
+            }else if prices[i] - minprice > maxprofit{
+                maxprofit = prices[i]-minprice
+            }
+        }
+        return maxprofit
+    }
+    class func maxProfit2(_ prices: [Int]) -> Int {
+        /*
+         一次遍历：O(n) 60ms
+         直接把最小值放在数组的第一位
+         */
+        if prices.count==0 || prices.count==1{
+            return 0
+        }
+        var minprice = prices[0]
+        var maxprofit : Int = 0
+        for i in 1..<prices.count {
+            if prices[i] > minprice{
+                maxprofit = prices[i]-minprice > maxprofit ? prices[i]-minprice : maxprofit
+            }else{
+                minprice = prices[i]
+            }
+        }
+        return maxprofit
+    }
+    class func maxProfit3(_ prices: [Int]) -> Int {
+        /*
+         快排思想：64ms
+         根据最大值一定在最小值之前-->三路快排思想
+         
+         1）当接下来的数字比最小数还要小 那么我们重新更新maxIndex和minIndex即可 并且记录归零之前的最大间隔
+         2）记录最大间隔引入循环外变量
+         3）当接下来的数字比最大值还大 我们只需要更新maxIndex即可 同时得更新money
+         */
+        if prices.count==0 || prices.count==1{
+            return 0
+        }
+        var maxprofit : Int = 0
+        var minIndex = 0
+        var maxIndex = 0
+        for i in 1..<prices.count {
+            if prices[i] < prices[minIndex] {
+                maxIndex = i
+                minIndex = i
+            }else if prices[i] > prices[maxIndex]{
+                maxIndex = i
+                maxprofit = max(maxprofit, prices[maxIndex]-prices[minIndex])
+            }
+        }
+        return maxprofit
+    }
+    //MARK:-----------买卖股票的最佳时机II
+    class func maxProfitII(_ prices: [Int]) -> Int {
+        /*
+         一次遍历：O(n) 56ms
+         继续在斜坡上爬升并持续增加从连续交易中获得的利润
+         */
+        if prices.count==0 || prices.count==1{
+            return 0
+        }
+        var maxprofit : Int = 0
+        for i in 1..<prices.count {
+            if prices[i] > prices[i-1] {
+                maxprofit += prices[i] - prices[i-1]
+            }
+        }
+        return maxprofit
+    }
+    class func maxProfitII2(_ prices: [Int]) -> Int {
+        /*
+         暴力法:O(n^n)调用递归函数n^n次。 超出时间限制
+         需要计算与所有可能的交易组合相对应的利润，并找出它们中的最大利润。
+         */
+        return calculate(prices, 0)
+    }
+    private class func calculate(_ prices : [Int], _ s : Int)->Int{
+        if s >= prices.count {
+            return 0
+        }
+        var max = 0
+        for start in s..<prices.count {
+            var maxpfrofit = 0
+            for i in start+1..<prices.count {
+                if prices[start] < prices[i] {
+                    var profit = calculate(prices, i+1) + prices[i]-prices[start]
+                    if profit > maxpfrofit{
+                        maxpfrofit = profit
+                    }
+                }
+            }
+            if maxpfrofit > max {
+                max = maxpfrofit
+            }
+        }
+        return max
+    }
+    class func maxProfitII3(_ prices: [Int]) -> Int {
+        /*
+         峰谷法：O(n) 56ms
+         TotalProfit=∑下i(height(peak下i)−height(valley下i))
+         */
+        if prices.count==0 || prices.count==1{
+            return 0
+        }
+        var maxprofit : Int = 0
+        var valley = prices[0]
+        var peak = prices[0]
+        var i = 0
+        while i < prices.count-1 {
+            while i < prices.count-1 && prices[i]>=prices[i+1]{
+                i += 1
+            }
+            valley = prices[i]
+            while i < prices.count-1 && prices[i] <= prices[i+1]{
+                i += 1
+            }
+            peak = prices[i]
+            maxprofit += peak - valley
+        }
+        return maxprofit
+    }
     //MARK:-----------
     //MARK:-----------
 }
@@ -1591,7 +1921,17 @@ public class ListNode{
         self.next = nil
     }
 }
-
+//MARK:-----------二叉树节点定义
+public class TreeNode{
+    public var val : Int
+    public var left : TreeNode?
+    public var right :TreeNode?
+    public init(_ val : Int){
+        self.val = val
+        self.left = nil
+        self.right = nil
+    }
+}
 
 //MARK:---------leetcode算法调用
 func algorithmTest(){
@@ -1753,4 +2093,58 @@ func algorithmTest(){
     print(Algorithm.subsets5([1, 2, 3]))
     print("\n")
     
+    print("合并两个有序数组")
+    var array1 = [1, 2, 3, 0, 0, 0]
+    let array2 = [2, 5, 6]
+//    Algorithm.merge(&array1, 3, array2, 3)
+    Algorithm.merge1(&array1, 3, array2, 3)
+//    Algorithm.merge2(&array1, 3, array2, 3)
+    print("\n")
+    
+    print("格雷编码")
+    print(Algorithm.grayCode(2))
+    print(Algorithm.grayCode(3))
+    print(Algorithm.grayCode1(2))
+    print(Algorithm.grayCode1(3))
+    print(Algorithm.grayCode2(2))
+    print(Algorithm.grayCode2(3))
+    print("\n")
+    
+    print("二叉树的最大深度")
+    let treeN1 = TreeNode(3)
+    let treeN2 = TreeNode(9)
+    let treeN3 = TreeNode(20)
+    let treeN4 = TreeNode(15)
+    let treeN5 = TreeNode(7)
+    treeN1.left = treeN2
+    treeN1.right = treeN3
+    treeN2.left = nil
+    treeN2.right = nil
+    treeN3.left = treeN4
+    treeN3.right = treeN5
+    treeN4.left = nil
+    treeN4.right = nil
+    treeN5.left = nil
+    treeN5.right = nil
+    print(Algorithm.maxDepth(treeN1))
+    print(Algorithm.maxDepth1(treeN1))
+    print("\n")
+    
+    print("买卖股票的最佳时机")
+    print(Algorithm.maxProfit([7, 1, 5, 3, 6, 4]))
+    print(Algorithm.maxProfit([7, 6, 4, 3, 1]))
+    print(Algorithm.maxProfit1([7, 1, 5, 3, 6, 4]))
+    print(Algorithm.maxProfit1([7, 6, 4, 3, 1]))
+    print(Algorithm.maxProfit2([7, 1, 5, 3, 6, 4]))
+    print(Algorithm.maxProfit2([7, 6, 4, 3, 1]))
+    print("\n")
+    
+    print("买卖股票的最佳时机II")
+    print(Algorithm.maxProfitII([7, 1, 5, 3, 6, 4]))
+    print(Algorithm.maxProfitII([1, 2, 3, 4, 5]))
+    print(Algorithm.maxProfitII2([7, 1, 5, 3, 6, 4]))
+    print(Algorithm.maxProfitII2([1, 2, 3, 4, 5]))
+    print(Algorithm.maxProfitII3([7, 1, 5, 3, 6, 4]))
+    print(Algorithm.maxProfitII3([1, 2, 3, 4, 5]))
+    print("\n")
 }

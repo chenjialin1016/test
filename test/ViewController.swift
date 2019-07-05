@@ -36,9 +36,6 @@ class ViewController: UIViewController {
         binaryTree.displayBinaryTree()
         binaryTree.preOrder()
         
-        //算法调用
-        algorithmTest()
-        
         //排序
         sortTest()
         
@@ -51,7 +48,11 @@ class ViewController: UIViewController {
         //初始化ohhttp
         self.initOHHTTP()
         
+        //算法调用
+        algorithmTest()
         
+        //设计模式
+        designPatternsTest()
     }
 
     //MARK:---------action
