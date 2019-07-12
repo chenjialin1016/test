@@ -92,3 +92,82 @@ class Lily : FlowerDecorator{
         return vase.getDescription() + "百合 "
     }
 }
+
+//MARK:=================示例2
+///=================定义基类==========================
+//饮料基类
+class Beverage{
+    var description : String
+    
+    init(_ description : String = "Unknow Beverage") {
+        self.description = description
+    }
+    
+    func getDescription()->String{
+        return description
+    }
+    
+    func cost()->Double{
+        return 0.0
+    }
+}
+//调料基类
+class CondimenDecorator : Beverage{
+    override func getDescription() -> String {
+        return ""
+    }
+}
+
+///=================实现不同的咖啡==============
+/// 浓缩咖啡
+class Espresso : Beverage{
+    init() {
+        super.init("浓缩咖啡")
+    }
+    
+    override func cost() -> Double {
+        return 1.99
+    }
+}
+
+class HouseBlend : Beverage{
+    init() {
+        super.init("星巴克杜绝调理咖啡：综合咖啡")
+    }
+    
+    override func cost() -> Double {
+        return 0.99
+    }
+}
+/// ============实现各种调料===========
+///摩卡
+class Mocha : CondimenDecorator{
+    var beverage : Beverage
+    init(_ beverage : Beverage) {
+        self.beverage = beverage
+    }
+    
+    override func getDescription() -> String {
+        return "摩卡，"+beverage.getDescription()
+    }
+    
+    override func cost() -> Double {
+        return beverage.cost() + 0.29
+    }
+}
+///牛奶
+class Milk : CondimenDecorator{
+    var beverage : Beverage
+    init(_ beverage : Beverage) {
+        self.beverage = beverage
+    }
+    
+    override func getDescription() -> String {
+        return "牛奶，"+beverage.getDescription()
+    }
+    
+    override func cost() -> Double {
+        return beverage.cost() + 0.79
+    }
+    
+}

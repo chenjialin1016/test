@@ -48,11 +48,15 @@ class ViewController: UIViewController {
         //初始化ohhttp
         self.initOHHTTP()
         
+        //swift遍历方式总结
+        TraversalTest()
+        
         //算法调用
         algorithmTest()
         
         //设计模式
         designPatternsTest()
+        
     }
 
     //MARK:---------action

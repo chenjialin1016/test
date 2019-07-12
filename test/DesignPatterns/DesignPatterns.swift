@@ -69,6 +69,7 @@ func designPatternsTest(){
     
     
     print("==============装饰者模式==============")
+    print("------示例1")
     //创建空花瓶
     var porcelain : VaseComponent = Porcelain()
     //打印最新的描述信息
@@ -79,5 +80,47 @@ func designPatternsTest(){
     porcelain = Lily(porcelain)
     //打印最新的描述信息
     porcelain.display()
+    print("------示例2")
+    //创建浓缩咖啡
+    var espresso : Beverage = Espresso()
+    //用户点了一杯牛奶摩卡浓缩咖啡
+    espresso = Milk(espresso)
+    espresso = Mocha(espresso)
+    print(espresso.getDescription())
+    print(espresso.cost())
+    print("\n")
+    
+    print("==============工厂模式==============")
+    print("------示例1：无工厂模式")
+    let weaponUser : WeaponUser = WeaponUser()
+    weaponUser.fireWithType(.AK)
+    weaponUser.fireWithType(.AWP)
+    print("------示例2：简单工厂模式")
+    let weaponUser2 : WeaponUser2 = WeaponUser2.init(WeaponFactory())
+    weaponUser.fireWithType(.AK)
+    weaponUser.fireWithType(.AWP)
+    print("------示例3：工厂方法模式")
+    var user : WeaponUser3 = GermanyWeaponUser()
+    user.fireWithType(.AK)
+    user = AmericaWeaponUser()
+    user.fireWithType(.AK)
+    print("------示例4：抽象工厂模式")
+    var user4 : WeaponUser4 = WeaponUser4.init(AmericanWeaponFactory())
+    user4.fireWithType(.AK)
+    user4.fireWithType(.HK)
+    user4.fireWithType(.AWP)
+    user4.setFactory(GermangWeaponFactory())
+    user4.fireWithType(.AK)
+    user4.fireWithType(.HK)
+    user4.fireWithType(.AWP)
+    print("------示例5：抽象工厂模式+工厂模式")
+    var user5 : WeaponUserType = AmericanWeaponUser5()
+    user5.fireWithType(.AK)
+    user5.fireWithType(.HK)
+    user5.fireWithType(.AWP)
+    user5 = GermanyWeaponUser5()
+    user5.fireWithType(.AK)
+    user5.fireWithType(.HK)
+    user5.fireWithType(.AWP)
     print("\n")
 }

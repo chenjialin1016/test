@@ -67,6 +67,13 @@
 		0A57477722C4CB1F00A8BA6D /* ExtendsReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A57477622C4CB1F00A8BA6D /* ExtendsReview.swift */; };
 		0A57477922C9EBFF00A8BA6D /* CompleteCaseReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A57477822C9EBFF00A8BA6D /* CompleteCaseReview.swift */; };
 		0A57477B22CA100300A8BA6D /* DesignPatterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A57477A22CA100300A8BA6D /* DesignPatterns.swift */; };
+		0A64DEAE22D429F00003B15D /* SwiftTraversalOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A64DEAD22D429F00003B15D /* SwiftTraversalOperation.swift */; };
+		0AB4143622D865E300AC9570 /* FactoryPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4143522D865E300AC9570 /* FactoryPattern.swift */; };
+		0AB4143822D868B600AC9570 /* 无工厂模式.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB4143722D868B600AC9570 /* 无工厂模式.png */; };
+		0AB4143A22D86FCD00AC9570 /* 简单工厂模式.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB4143922D86FCD00AC9570 /* 简单工厂模式.png */; };
+		0AB4143C22D86FD300AC9570 /* 工厂方法模式.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB4143B22D86FD300AC9570 /* 工厂方法模式.png */; };
+		0AB4143E22D87B5100AC9570 /* 抽象工厂模式.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB4143D22D87B5000AC9570 /* 抽象工厂模式.png */; };
+		0AB4144022D87EEC00AC9570 /* 抽象工厂+工厂方法模式.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB4143F22D87EEC00AC9570 /* 抽象工厂+工厂方法模式.png */; };
 		0AC6A79722B9E96500C98F79 /* MockDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC6A79622B9E96500C98F79 /* MockDemoTests.m */; };
 		0AC6A79922B9E9EE00C98F79 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC6A79822B9E9EE00C98F79 /* Person.swift */; };
 		0AD617AF22B736A70007B7E1 /* test1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD617AE22B736A70007B7E1 /* test1UITests.swift */; };
@@ -203,6 +210,13 @@
 		0A57477622C4CB1F00A8BA6D /* ExtendsReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendsReview.swift; sourceTree = "<group>"; };
 		0A57477822C9EBFF00A8BA6D /* CompleteCaseReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteCaseReview.swift; sourceTree = "<group>"; };
 		0A57477A22CA100300A8BA6D /* DesignPatterns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignPatterns.swift; sourceTree = "<group>"; };
+		0A64DEAD22D429F00003B15D /* SwiftTraversalOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTraversalOperation.swift; sourceTree = "<group>"; };
+		0AB4143522D865E300AC9570 /* FactoryPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryPattern.swift; sourceTree = "<group>"; };
+		0AB4143722D868B600AC9570 /* 无工厂模式.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "无工厂模式.png"; sourceTree = "<group>"; };
+		0AB4143922D86FCD00AC9570 /* 简单工厂模式.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "简单工厂模式.png"; sourceTree = "<group>"; };
+		0AB4143B22D86FD300AC9570 /* 工厂方法模式.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "工厂方法模式.png"; sourceTree = "<group>"; };
+		0AB4143D22D87B5000AC9570 /* 抽象工厂模式.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "抽象工厂模式.png"; sourceTree = "<group>"; };
+		0AB4143F22D87EEC00AC9570 /* 抽象工厂+工厂方法模式.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "抽象工厂+工厂方法模式.png"; sourceTree = "<group>"; };
 		0AC6A79622B9E96500C98F79 /* MockDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MockDemoTests.m; sourceTree = "<group>"; };
 		0AC6A79822B9E9EE00C98F79 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		0AC6A79D22BA106F00C98F79 /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
@@ -355,6 +369,7 @@
 				0A0CBD7D2283BF1800DFBB82 /* AppDelegate.swift */,
 				0A0CBD7F2283BF1800DFBB82 /* ViewController.swift */,
 				0A0F218922B2206B0010D70C /* ProjectClass.swift */,
+				0A64DEAD22D429F00003B15D /* SwiftTraversalOperation.swift */,
 				0A57477C22CA100A00A8BA6D /* DesignPatterns */,
 				0AD617BF22B774CB0007B7E1 /* KIFDemo */,
 				0A0F21D722B39F450010D70C /* Movies */,
@@ -513,6 +528,12 @@
 				0A23BFA222CE05DF0050664A /* DecoratorPattern.swift */,
 				0A23C1A222CF432B0050664A /* 装饰者模式.png */,
 				0A23C1A422CF4A790050664A /* 装饰者模式函数调用图示.png */,
+				0AB4143522D865E300AC9570 /* FactoryPattern.swift */,
+				0AB4143722D868B600AC9570 /* 无工厂模式.png */,
+				0AB4143922D86FCD00AC9570 /* 简单工厂模式.png */,
+				0AB4143B22D86FD300AC9570 /* 工厂方法模式.png */,
+				0AB4143D22D87B5000AC9570 /* 抽象工厂模式.png */,
+				0AB4143F22D87EEC00AC9570 /* 抽象工厂+工厂方法模式.png */,
 			);
 			path = DesignPatterns;
 			sourceTree = "<group>";
@@ -773,14 +794,19 @@
 			files = (
 				0A0CBD882283BF1B00DFBB82 /* LaunchScreen.storyboard in Resources */,
 				0AF7468C22B8DE6C00209A2B /* abbaData.json in Resources */,
+				0AB4143E22D87B5100AC9570 /* 抽象工厂模式.png in Resources */,
 				0A1E6FD622C0CA4C00AEFB5B /* AddReviewViewController.xib in Resources */,
 				0A1E6FD122C0C9DB00AEFB5B /* AddViewController.xib in Resources */,
 				0A0CBD852283BF1B00DFBB82 /* Assets.xcassets in Resources */,
+				0AB4143C22D86FD300AC9570 /* 工厂方法模式.png in Resources */,
 				0A23C1A522CF4A790050664A /* 装饰者模式函数调用图示.png in Resources */,
 				0A23BF9722CAFF450050664A /* 策略模式.png in Resources */,
 				0A23C1A322CF432B0050664A /* 装饰者模式.png in Resources */,
 				0A23BFA122CCAC270050664A /* 自定义通知中心.png in Resources */,
+				0AB4144022D87EEC00AC9570 /* 抽象工厂+工厂方法模式.png in Resources */,
+				0AB4143822D868B600AC9570 /* 无工厂模式.png in Resources */,
 				0A0CBD832283BF1800DFBB82 /* Main.storyboard in Resources */,
+				0AB4143A22D86FCD00AC9570 /* 简单工厂模式.png in Resources */,
 				0A23BF9F22CCAC180050664A /* Foundation自带的通知模式.png in Resources */,
 				0A23BF9D22CC8A830050664A /* 观察者模式.png in Resources */,
 			);
@@ -1007,8 +1033,10 @@
 				0A370F4A2296A3EE00EF9AC2 /* GeneralTree.swift in Sources */,
 				0A0CBD802283BF1800DFBB82 /* ViewController.swift in Sources */,
 				0A57477522C4CB0000A8BA6D /* ConditionReview.swift in Sources */,
+				0A64DEAE22D429F00003B15D /* SwiftTraversalOperation.swift in Sources */,
 				0A0F219022B3753C0010D70C /* BullsEyeGame.swift in Sources */,
 				0A57477B22CA100300A8BA6D /* DesignPatterns.swift in Sources */,
+				0AB4143622D865E300AC9570 /* FactoryPattern.swift in Sources */,
 				0AD617BD22B774AA0007B7E1 /* Scene2ViewController.swift in Sources */,
 				0A23BF9922CB01D30050664A /* StrategyPattern.swift in Sources */,
 				0A23BF9B22CB30110050664A /* ObservePattern.swift in Sources */,

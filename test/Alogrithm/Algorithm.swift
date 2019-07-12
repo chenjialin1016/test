@@ -1907,10 +1907,307 @@ class Algorithm{
         }
         return maxprofit
     }
+    //MARK:-----------二叉树中的最大路径和
+    
+    class func maxPathSum(_ root: TreeNode?) -> Int {
+        /*
+         递归 140ms O(n)
+         
+         考虑实现一个简化的函数 max_gain(node) 计算它及其子树的最大贡献 即 计算包含这个顶点的最大权值路径
+         步骤：
+         1、初始化 max_sum 为最小可能的证书并调用 max_gain(node=root)
+         2、实现 max_gain(node)检查是继续旧路径还是开始新路径
+            1）边界情况：如果节点为空，那么最大权值是 0 。
+            2）对该节点的所有孩子递归调用 max_gain，计算从左右子树的最大权值：left_gain = max(max_gain(node.left), 0) 和 right_gain = max(max_gain(node.right), 0)。
+            3）检查是维护旧路径还是创建新路径。创建新路径的权值是：price_newpath = node.val + left_gain + right_gain，当新路径更好的时候更新 max_sum。
+            4）对于递归返回的到当前节点的一条最大路径，计算结果为：node.val + max(left_gain, right_gain)。
+         */
+        
+        var max_sum = Int.min
+        max_gain(root, &max_sum)
+        return max_sum
+    }
+    
+    private class func max_gain(_ node : TreeNode?, _ max_sum : inout Int)->Int{
+        
+        if node == nil {
+            return 0
+        }
+        //分别递归计算左右子树的最大路径和
+        let left_gain = max(max_gain(node?.left, &max_sum), 0)
+        let right_gain = max(max_gain(node?.right, &max_sum), 0)
+        
+        //创建新路径的权值
+        let price_newpath = (node?.val)! + left_gain+right_gain
+        
+        //如果有更好的路径时，更新最大值
+        max_sum = max(max_sum, price_newpath)
+        
+        return (node?.val)! + max(left_gain, right_gain)
+    }
+    //MARK:-----------只出现一次的数字
+    class func singleNumber(_ nums: [Int]) -> Int {
+        /*
+         哈希表操作：140ms O(n)
+         利用字典记录每个数字出现的次数，最后遍历数组找出只出现一次的数返回
+         */
+        var temp = [Int:Int]()
+        for num in nums {
+            if (temp[num] == nil){
+                temp[num] = 1
+            }else{
+                temp.updateValue(temp[num]!+1, forKey: num)
+            }
+        }
+        for (key, value) in temp {
+            if value == 1{
+                return key
+            }else{
+                continue
+            }
+        }
+        return 0
+    }
+    class func singleNumber1(_ nums: [Int]) -> Int {
+        /*
+         列表操作：O(n^2) 超出时间限制
+         利用数组，遍历nums中的每一个元素，如果是新出现则加入数组，如果已经在列表则删除
+         */
+        var temp = [Int]()
+        for value in nums {
+            if temp.contains(value){
+                temp = temp.filter{$0 != value }
+            }else{
+                temp.append(value)
+            }
+        }
+        return temp.first!
+    }
+    class func singleNumber2(_ nums: [Int]) -> Int {
+        /*
+         异或 O(n) 136ms
+         */
+        var temp = nums[0]
+        if nums.count > 1{
+            for i in 1..<nums.count {
+                temp = temp ^ nums[i]
+            }
+        }
+        
+        return temp
+    }
+    //MARK:-----------环形链表
+    class func hasCycle(_ head:ListNode?)->Bool{
+        /*
+         哈希表
+         思路：可以通过检查一个结点此前是否被访问过来判断链表是否为环形链表
+         算法：我们遍历所有结点并在哈希表中存储每个结点的引用（或内存地址）。如果当前结点为空结点 nil即以检测到链表尾部的下一个结点，那么我们已经遍历完整个链表，并且该链表不是环形链表。如果当前结点的引用已经存在于哈希表中，那么返回true即该链表为环形链表
+         时间复杂度：O(n)，对于含有n 个元素的链表，我们访问每个元素最多一次。添加一个结点到哈希表中只需要花费O(1) 的时间。
+         */
+        var head = head
+        var nodeSeen : [Int:ListNode?] = [:]
+        while head != nil {
+            if nodeSeen[(head?.val)!] != nil {
+                return true
+            }else{
+                nodeSeen[(head?.val)!] = head
+            }
+            head = head?.next
+        }
+        return false
+    }
+    class func hasCycle2(_ head:ListNode?)->Bool{
+        /*
+         双指针
+         思路：双指针
+         算法：我们遍历所有结点并在哈希表中存储每个结点的引用（或内存地址）。如果当前结点为空结点 nil即以检测到链表尾部的下一个结点，那么我们已经遍历完整个链表，并且该链表不是环形链表。如果当前结点的引用已经存在于哈希表中，那么返回true即该链表为环形链表
+         时间复杂度：O(n)，让我们将 n 设为链表中结点的总数。
+         */
+        if head == nil || head?.next == nil {
+            return false
+        }
+        var slow = head
+        var fast = head?.next
+        while slow?.val != fast?.val {
+            if fast == nil || fast?.next == nil{
+                return false
+            }
+            slow = slow?.next
+            fast = fast?.next?.next
+        }
+        return true
+    }
+    //MARK:-----------环形链表II
+    class func detectCycle(_ head:ListNode?)->ListNode?{
+        /*
+         哈希表
+         我们分配一个 Set 去保存所有的列表节点。我们逐一遍历列表，检查当前节点是否出现过，如果节点已经出现过，那么一定形成了环且它是环的入口。否则如果有其他点是环的入口，我们应该先访问到其他节点而不是这个节点。其他情况，没有成环则直接返回 null
+         */
+        var head = head
+        var nodeSeen : [Int:ListNode?] = [:]
+        while head != nil {
+            if nodeSeen[(head?.val)!] != nil {
+                return head
+            }else{
+                nodeSeen[(head?.val)!] = head
+            }
+            head = head?.next
+        }
+        return nil
+    }
+    class func detectCycle2(_ head:ListNode?)->ListNode?{
+        /*
+         双指针
+         思路：双指针
+         算法：算法被划分成两个不同的 阶段 。在第一阶段，找出列表中是否有环，如果没有环，可以直接返回 null 并退出。否则，用 相遇节点 来找到环的入口。
+         时间复杂度：O(n)，让我们将 n 设为链表中结点的总数。
+         */
+        if head == nil || head?.next == nil {
+            return nil
+        }
+        //如果这里有一个环，快/慢指针就会有一个相遇节点，反之，返回nil
+        let intersect = getIntersect(head)
+        if intersect == nil {
+            return nil
+        }
+        
+        //用两个相同速度的指针，一个从链表头开始，一个从相遇节点开始，当它们指向同一个节点时，这个结点就是环的入口
+        var ptr1 = head
+        var ptr2 = intersect
+        while ptr1?.val != ptr2?.val {
+            ptr1 = ptr1?.next
+            ptr2 = ptr2?.next
+        }
+        return ptr1
+    }
+    private class func getIntersect(_ head:ListNode?)->ListNode?{
+        var tortoise = head
+        var hare = head
+        //快指针会遍历一圈环去遇见慢指针
+        //如果没有环，则返回空
+        while hare != nil && hare?.next != nil {
+            tortoise = tortoise?.next
+            hare = hare?.next?.next
+            if tortoise?.val == hare?.val{
+                return tortoise
+            }
+            
+        }
+        return nil
+    }
+    
+    //MARK:-----------
+    //MARK:-----------
+    //MARK:-----------
+    //MARK:-----------
+    //MARK:-----------
     //MARK:-----------
     //MARK:-----------
 }
 
+//MARK:-----------双链表节点定义
+public class Node{
+    public var key : Int
+    public var val : Int
+    public var next, prev : Node?
+    init(_ k : Int, _ v : Int) {
+        self.key = k
+        self.val = v
+    }
+}
+//建立一个双链表
+class DoubleList{
+    //头尾虚节点
+    var head, tail : Node?
+    //链表元素数
+    var size : Int = 0
+    
+    init() {
+        head = Node(0, 0)
+        tail = Node(0,0)
+        head?.next = tail
+        tail?.prev = head
+        size = 0
+    }
+    //在链表头部添加节点x
+    public func addFirst(_ x : Node){
+        x.next = head?.next
+        x.prev = head
+        head?.next?.prev = x
+        head?.next = x
+        size += 1
+    }
+    //删除链表中的节点（x一定存在）
+    public func remove(_ x : Node){
+        x.prev?.next = x.next
+        x.next?.prev = x.prev
+        size -= 1
+    }
+    //删除链表最后一个节点，并返回该节点
+    public func removeLast()->Node?{
+        if tail?.prev?.val == (head?.val)! {
+            return nil
+        }
+        let last = tail?.prev
+        remove(last!)
+        return last
+    }
+    //返回链表长度
+    public func Size()->Int{
+        return size
+    }
+}
+//MARK:-----------LRU缓存机制
+/*
+ LRU 缓存淘汰算法就是一种常用策略。LRU 的全称是 Least Recently Used，也就是说我们认为最近使用过的数据应该是是「有用的」，很久都没用过的数据应该是无用的，内存满了就优先删那些很久没用过的数据。
+ 
+ 思想：哈希表+双向链表
+ */
+class LRUCache{
+    //哈希表
+    var map : [Int:Node?] = [:]
+    //双向链表
+    var cache : DoubleList
+    //最大容量
+    var cap : Int
+    
+    init(_ capacity : Int) {
+        self.cap = capacity
+        self.map = [:]
+        self.cache = DoubleList.init()
+    }
+    
+    public func get(_ key : Int)->Int{
+        if map[key] == nil {
+            return -1
+        }
+        let val = (map[key] as? Node)!.val
+        //利用put方法吧数据提前
+        put(key,val)
+        return val
+    }
+    public func put(_ key : Int, _ val : Int){
+        //先把新节点x做出来
+        let x = Node(key, val)
+        
+        if map[key] != nil{
+            //删除旧节点
+            cache.remove((map[key] as? Node)!)
+            cache.addFirst(x)
+            //更新map中的数据
+            map[key] = x
+        }else{
+            if cap == cache.Size(){
+                //删除链表最后一个节点
+                let last = cache.removeLast()
+                map.removeValue(forKey: (last?.key)!)
+            }
+            //直接添加到头部
+            cache.addFirst(x)
+            map[key] = x
+        }
+    }
+}
 
 //MARK:-----------链表节点定义
 public class ListNode{
@@ -2146,5 +2443,81 @@ func algorithmTest(){
     print(Algorithm.maxProfitII2([1, 2, 3, 4, 5]))
     print(Algorithm.maxProfitII3([7, 1, 5, 3, 6, 4]))
     print(Algorithm.maxProfitII3([1, 2, 3, 4, 5]))
+    print("\n")
+    
+    print("二叉树中的最大路径和")
+    let treeN6 = TreeNode(-10)
+    let treeN7 = TreeNode(9)
+    let treeN8 = TreeNode(20)
+    let treeN9 = TreeNode(15)
+    let treeN10 = TreeNode(7)
+    treeN6.left = treeN7
+    treeN6.right = treeN8
+    treeN7.left = nil
+    treeN7.right = nil
+    treeN8.left = treeN9
+    treeN8.right = treeN10
+    treeN9.left = nil
+    treeN9.right = nil
+    treeN10.left = nil
+    treeN10.right = nil
+    print(Algorithm.maxPathSum(treeN6))
+    let treeN11 = TreeNode(1)
+    let treeN12 = TreeNode(2)
+    let treeN13 = TreeNode(3)
+    treeN11.left = treeN12
+    treeN11.right = treeN13
+    print(Algorithm.maxPathSum(treeN11))
+    print("\n")
+    
+    print("只出现一次的数字")
+    print(Algorithm.singleNumber([2, 2, 1]))
+    print(Algorithm.singleNumber([4, 1, 2, 1, 2]))
+    print(Algorithm.singleNumber1([2, 2, 1]))
+    print(Algorithm.singleNumber1([4, 1, 2, 1, 2]))
+    print(Algorithm.singleNumber2([2, 2, 1]))
+    print(Algorithm.singleNumber2([4, 1, 2, 1, 2]))
+    print("\n")
+    
+    print("环形链表")
+    let node17 = ListNode(3)
+    let node18 = ListNode(2)
+    let node19 = ListNode(0)
+    let node20 = ListNode(-4)
+    node17.next = node18
+    node18.next = node19
+    node19.next = node20
+    node20.next = node18
+    print(Algorithm.hasCycle(node17))
+//    print(Algorithm.hasCycle2(node17))
+    let node21 = ListNode(1)
+    let node221 = ListNode(2)
+    node21.next = node221
+    node221.next = node21
+    print(Algorithm.hasCycle(node21))
+//    print(Algorithm.hasCycle2(node21))
+    print("\n")
+    
+    print("环形链表II")
+//    print(Algorithm.detectCycle(node17)?.val)
+    print(Algorithm.detectCycle2(node17)?.val)
+//    print(Algorithm.detectCycle(node21)?.val)
+    print(Algorithm.detectCycle2(node21)?.val)
+    print("\n")
+    
+    print("LRU缓存机制")
+    let cache = LRUCache(2)
+    cache.put(1, 1)
+    cache.put(2, 2)
+    print(cache.get(1))// 返回  1
+    print(cache.map)
+    cache.put(3, 3)// 该操作会使得密钥 2 作废
+    print(cache.get(2))// 返回 -1 (未找到)
+    print(cache.map)
+    cache.put(4, 4)// 该操作会使得密钥 1 作废
+    print(cache.get(1))// 返回 -1 (未找到)
+    print(cache.get(3))// 返回  3
+    print(cache.get(4))// 返回  4
+    print(cache.map)
     print("\n")
 }
