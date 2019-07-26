@@ -1,5 +1,8 @@
 PODS:
   - Alamofire (4.0.1)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
   - KIF (3.7.7):
     - KIF/Core (= 3.7.7)
   - KIF/Core (3.7.7)
@@ -18,33 +21,46 @@ PODS:
   - OHHTTPStubs/Swift (8.0.0):
     - OHHTTPStubs/Default
   - Quick (1.0.0)
+  - ReactiveCocoa (2.5):
+    - ReactiveCocoa/UI (= 2.5)
+  - ReactiveCocoa/Core (2.5):
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/no-arc (2.5)
+  - ReactiveCocoa/UI (2.5):
+    - ReactiveCocoa/Core
   - SwiftyJSON (3.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0.1)
+  - FMDB
   - KIF (~> 3.0)
   - Nimble (~> 5.0.0)
   - OHHTTPStubs/Swift
   - Quick (~> 1.0.0)
+  - ReactiveCocoa (~> 2.3)
   - SwiftyJSON (~> 3.0.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - FMDB
     - KIF
     - Nimble
     - OHHTTPStubs
     - Quick
+    - ReactiveCocoa
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   KIF: 6f525b18d4cca3d6445f3c5d683294e9157bd3f4
   Nimble: 56fc9f5020effa2206de22c3dd910f4fb011b92f
   OHHTTPStubs: 9cbce6364bec557cc3439aa6bb7514670d780881
   Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
+  ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
 
-PODFILE CHECKSUM: 81e42e7e26f7ec456d6b98eb4395f3a9d4a1dbb3
+PODFILE CHECKSUM: 62cafbd5a0c5a66efba0ca23a629dc032b3a03ca
 
 COCOAPODS: 1.5.3

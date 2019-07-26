@@ -19,6 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         customizeAppearance()
+        
+        //这里做卡顿监测
+        SMLagMonitor.shareInstance().begin()
+        
         return true
     }
 
@@ -57,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UISearchBar.appearance().barTintColor = tintColor
         UINavigationBar.appearance().barTintColor = tintColor
         UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+//        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
     }
 }
 

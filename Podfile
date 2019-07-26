@@ -8,6 +8,7 @@ def testing_pods
     pod 'Nimble', '~>5.0.0'
     pod 'Alamofire', '~> 4.0.1'
     pod 'OHHTTPStubs/Swift'
+    
 end
 
 def testingUI_pods
@@ -18,6 +19,8 @@ def test_pods
     pod 'Alamofire', '~> 4.0.1'
     pod 'OHHTTPStubs/Swift',:configurations => ['Debug']
     pod 'SwiftyJSON', '~>3.0.0'
+    pod 'FMDB'
+    pod 'ReactiveCocoa', '~>2.3'
 end
 
 target 'test' do

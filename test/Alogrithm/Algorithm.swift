@@ -2096,13 +2096,663 @@ class Algorithm{
         return nil
     }
     
+    //MARK:-----------排序链表
+    class func sortList(_ head : ListNode?)->ListNode?{
+        /*
+         11ms
+         题目要求时间空间复杂度分别为O(nlogn)和O(1)，根据时间复杂度我们自然想到二分法，从而联想到归并排序
+         1、分割cut环节： 找到当前链表中点，并从中点将链表断开（以便在下次递归时可以处理正确的链表片段）；
+            1）我们使用fast,slow快慢双指针法，奇数个节点找到中点，偶数个节点找到中心左边的节点。
+            2）找到中点slow后，执行slow.next = None将链表切断。
+            3）递归分割时，输入当前链表左端点head和中心节点slow的下一个节点tmp(因为链表是从slow开始切断的)。
+            4）递归终止条件： 当head.next == None时，说明只有一个节点了，直接返回此节点。
+         2、合并merge环节： 将两个排序链表合并，转化为一个排序链表。
+            双指针法合并，时间复杂度O(l + r)，l, r分别代表两个链表长度。
+         3、当head == None时，直接返回None。
+         */
+        /*
+         归并排序：
+         1、递归使用二分法将链表分割成两个链表
+            1）不过由于是单向链表，没法直接获得中间节点，需要循环先计算出链表的长度。
+            2）通过 count/2 计算出中间的节点，注意分割后的链表的长度为count/2和（count-count/2）,考虑奇数问题
+            3）找到中间节点后，把链表断成两个链表，不然各种判断会很复杂
+         2、合并有序的链表
+            1）第一步分到最后是单个元素的链表，可以看成有序链表
+            2）实际上，这一步就转换成了合并两个有序的链表
+            3）使用递归，每次只判断链表头，代码简洁且易懂
+         */
+        if head == nil || head?.next == nil {
+            return head
+        }
+        
+        //计算出链表的长度
+        var countNode = head
+        var count = 0
+        while countNode != nil {
+            count += 1
+            countNode = countNode?.next
+        }
+        return sortList(head, count)
+    }
+    //排序链表
+    private class func sortList(_ head : ListNode?, _ count : Int)->ListNode?{
+        //递归结束条件
+        if count <= 1{
+            return head
+        }
+        var leftEnd = head
+        for i in 0..<count/2-1{
+            leftEnd = leftEnd?.next
+        }
+        var rightStart = leftEnd?.next
+        //断链，如果不断链，各种判断让你死去活来
+        leftEnd?.next = nil
+        //合并两个已经排好序的链表
+        //第二个链表的长度为count - count / 2，不能直接是count / 2，奇数计算会错误
+        return merge(sortList(head, count/2), sortList(rightStart, count-count/2))
+    }
+    //合并两个有序的链表，使用递归更简洁，每次只比较两个链表的链头
+    private class func merge(_ l1 : ListNode?, _ l2 : ListNode?)->ListNode?{
+        if l1 == nil {
+            return l2
+        }
+        if l2 == nil {
+            return l1
+        }
+        var l1 = l1
+        var l2 = l2
+        var head : ListNode?
+        if l1!.val <= l2!.val {
+            head = l1
+            l1?.next = merge(l1?.next, l2)
+        }else{
+            head = l2
+            l2?.next = merge(l1, l2?.next)
+        }
+        return head
+    }
+    
+    //MARK:-----------相交链表
+    class func getIntersectionNode(_ headA : ListNode?, _ headB : ListNode?)->ListNode?{
+        /*
+         双指针法O(n)
+         
+         根据题目意思 如果两个链表相交，那么相交点之后的长度是相同的
+         
+         我们需要做的事情是，让两个链表从同距离末尾同等距离的位置开始遍历。这个位置只能是较短链表的头结点位置。 为此，我们必须消除两个链表的长度差
+         
+            指针 pA 指向 A 链表，指针 pB 指向 B 链表，依次往后遍历
+            如果 pA 到了末尾，则 pA = headB 继续遍历
+            如果 pB 到了末尾，则 pB = headA 继续遍历
+            比较长的链表指针指向较短链表head时，长度差就消除了
+        如此，只需要将最短链表遍历两次即可找到位置
+
+         */
+        
+        if headA == nil || headB == nil {
+            return nil
+        }
+        var pA = headA
+        var pB = headB
+        
+        while pA != pB {
+            pA = (pA == nil) ? headB : pA?.next
+            pB = (pB == nil) ? headA : pB?.next
+        }
+        return pA
+    }
+    class func getIntersectionNode2(_ headA : ListNode?, _ headB : ListNode?)->ListNode?{
+        
+        if headA == nil || headB == nil {
+            return nil
+        }
+        var pA = headA
+        var pB = headB
+        
+        var len1 = getNodeLength(headA)
+        var len2 = getNodeLength(headB)
+        while len1 < len2 {
+            pB = pB?.next
+            len2 -= 1
+        }
+        while len1 > len2 {
+            pA = pA?.next
+            len1 -= 1
+        }
+        while pA != pB {
+            pA = pA?.next
+            pB = pB?.next
+        }
+        return pA
+    }
+    private class func getNodeLength(_ head : ListNode?)->Int{
+        var len = 0
+        var head = head
+        while head != nil {
+            head = head?.next
+            len += 1
+        }
+        return len
+    }
+    //MARK:-----------求众数
+    class func majorityElement(_ nums : [Int])->Int{
+        
+        /*
+         哈希表：O(n)
+         */
+        
+        if nums.count == 0{
+            return 0
+        }
+        let count = nums.count / 2
+        var dic : [Int:Int] = [Int:Int]()
+        for num in nums {
+            if dic[num] == nil {
+                dic[num]  = 1
+            }else{
+                dic[num] = dic[num]! + 1
+            }
+        }
+        for (key, value) in dic {
+            if value > count{
+                return key
+            }else{
+                return 0
+            }
+        }
+        return 0
+    }
+    class func majorityElement2(_ nums : [Int])->Int{
+        
+        /*
+         排序：O(nlogn)
+         
+         如果所有数字被单调递增或者单调递减的顺序排了序，那么众数的下标为[n/2]（当n 是偶数时，下标为[n/2]+1
+         */
+        
+        if nums.count == 0{
+            return 0
+        }
+        let nums = nums.sorted()
+        return nums[nums.count/2]
+    }
+    class func majorityElement3(_ nums : [Int])->Int{
+        
+        /*
+         分治：O(nlogn)
+         
+         如果我们知道数组左边一半和右边一半的众数，我们就可以用线性时间知道全局的众数是哪个。
+         使用经典的分治算法递归求解，直到所有的子问题都是长度为 1 的数组
+         */
+        return majorityElement(nums, 0, nums.count-1)
+        
+    }
+    private class func majorityElement(_ nums : [Int], _ lo : Int, _ hi : Int)->Int{
+        //如果数组只有一个元素
+        if lo == hi{
+            return nums[lo]
+        }
+        
+        //递归求解左右两边的众数
+        let mid = (hi-lo)/2 + lo
+        var left = majorityElement(nums, lo, mid)
+        var right = majorityElement(nums, mid+1, hi)
+        
+        if left == right {
+            return left
+        }
+        
+        //比较左右两边众数的次数，找出最大次数的即为数组的众数
+        let leftCount = countInRange(nums, left, lo, hi)
+        let rightCount = countInRange(nums, right, lo, hi)
+        
+        return leftCount > rightCount ? left : right
+    }
+    private class func countInRange(_ nums : [Int], _ num : Int, _ lo : Int, _ hi : Int)->Int{
+        var count = 0
+        for i in lo...hi {
+            if nums[i] == num{
+                count += 1
+            }
+        }
+        return count
+    }
+    
+    //MARK:-----------反转链表
+    class func reverseList(_ head : ListNode?)->ListNode?{
+        /*
+         迭代：O(n)
+         假设存在链表 1 → 2 → 3 → Ø，我们想要把它改成 Ø ← 1 ← 2 ← 3。
+         
+         在遍历列表时，将当前节点的 next 指针改为指向前一个元素。由于节点没有引用其上一个节点，因此必须事先存储其前一个元素。在更改引用之前，还需要另一个指针来存储下一个节点。不要忘记在最后返回新的头引用！
+         */
+        if head == nil {
+            return nil
+        }
+        var curr = head
+        var prev : ListNode? = nil
+        while curr != nil {
+            let nextTemp = curr?.next
+            curr?.next = prev
+            prev = curr
+            curr = nextTemp
+        }
+        return prev
+    }
+    class func reverseList2(_ head : ListNode?)->ListNode?{
+        /*
+         递归：O(n)
+         
+         */
+        if head == nil || head?.next == nil{
+            return head
+        }
+        var p : ListNode? = reverseList2(head?.next)
+        head?.next?.next = head
+        head?.next = nil
+        return p
+    }
+    //MARK:-----------数组中的第k个最大元素
+    class func findKthLargest(_ nums : [Int], _ k : Int)->Int{
+        /*
+         排序，取出第k个元素
+         
+         最朴素的方法是先对数组进行排序，再返回倒数第 k 个元素
+         */
+        var nums = nums.sorted()
+        return nums[nums.count-k]
+    }
+    class func findKthLargest1(_ nums : [Int], _ k : Int)->Int{
+        /*
+         快速选择 O(NlogN)。
+         随机选择一个枢轴。
+         使用划分算法将枢轴放在数组中的合适位置 pos。将小于枢轴的元素移到左边，大于等于枢轴的元素移到右边。
+         比较 pos 和 N - k 以决定在哪边继续递归处理。
+         */
+//        return findKth(nums, k, 0, nums.count-1)
+        var nums = nums
+        let size = nums.count
+        return quickselect(nums, 0, size-1, size-k)
+    }
+//    private class func findKth(_ nums : [Int], _ k : Int, _ start : Int, _ end : Int)->Int{
+//        var copy = [Int].init(nums)
+//        let mid = partition(&copy, start, end)
+//        if mid == k-1 {
+//            return copy[mid]
+//        }else if mid < k-1{
+//            return findKth(copy, k, mid+1,end)
+//        }else{
+//            return findKth(copy, k, start, mid-1)
+//        }
+//    }
+//    private class func partition(_ nums : inout [Int], _ start : Int, _ end : Int)->Int{
+//        guard start<=end, end<nums.count else {
+//            return -1
+//        }
+//        let tmp = nums[start]
+//        var start = start
+//        var end = end
+//        while start < end {
+//            while start<end, nums[end] <= tmp{
+//                end -= 1
+//            }
+//            nums[start] = nums[end]
+//            while start<end, nums[start]>=tmp{
+//                start += 1
+//            }
+//            nums[end] = nums[start]
+//        }
+//        nums[start] = tmp
+//        return start
+//    }
+    private class func partition(_ nums : inout [Int], _ left : Int, _ right : Int, _ pivot_index : Int)->Int{
+        let pivot = nums[pivot_index]
+        //将基准元素移到末尾
+        nums.swapAt(pivot_index, right)
+        var store_index = left
+        
+        //将左右小于基准的元素移到左边
+        for i in left...right{
+            if nums[i] < pivot{
+                nums.swapAt(store_index, i)
+                store_index += 1
+            }
+        }
+        
+        //将基准移到最后
+        nums.swapAt(store_index, right)
+        return store_index
+    }
+    private class func quickselect(_ nums : [Int], _ left : Int, _ right : Int, _ k_smallest :Int)->Int{
+        
+        var nums = nums
+        //返回第k个最小的元素
+        //如果只有一个元素
+        if left == right{
+            return nums[left]
+        }
+        
+        //选择一个随机的基准下标
+        var pivot_index = left+Int.randomIntNumber(Range(0...(right-left)))
+        pivot_index = partition(&nums, left, right, pivot_index)
+        
+        //如果第k个最大值等于基准下标
+        if k_smallest == pivot_index {
+            return nums[k_smallest]
+        }else if k_smallest < pivot_index{
+            //基准左边查找
+            return quickselect(nums, left, pivot_index-1, k_smallest)
+        }else{
+            //基准右边查找
+            return quickselect(nums, pivot_index+1, right, k_smallest)
+        }
+    }
+    //MARK:-----------存在重复元素
+    class func containsDuplicate(_ nums : [Int])->Bool{
+        /*
+         现行查找 O(n^2)
+         循环不变式
+         在下一次搜索之前,搜索过的整数中没有重复的整数。
+         */
+        for i in 0..<nums.count{
+            for j in 0..<i {
+                if nums[j] == nums[i] {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    class func containsDuplicate1(_ nums : [Int])->Bool{
+        /*
+         哈希表
+         时间复杂度为O(n)，
+         */
+        var arr : [Int] = [Int]()
+        for num in nums {
+            if arr.contains(num) {
+                return true
+            }else{
+                arr.append(num)
+            }
+        }
+        
+        return false
+    }
+    class func containsDuplicate2(_ nums : [Int])->Bool{
+        /*
+         排序
+         如果存在重复元素，排序后它们应该相邻。
+         
+         时间复杂度 : O(nlogn)。 排序的复杂度是O(nlogn)，扫描的复杂度是O(n)。整个算法主要由排序过程决定，因此是O(nlogn)。
+         
+         */
+        var nums = nums.sorted()
+        for i in 0..<nums.count-1 {
+            if nums[i] == nums[i+1] {
+                return true
+            }
+        }
+        return false
+    }
+    //MARK:-----------二叉搜索树中第k小的元素
+    private static var res = Int.max
+    private static var count = 0
+    class func kthSmallest(_ root : TreeNode?, _ k : Int)->Int{
+        /*
+         利用 二叉树在中序遍历后，得到的是有序数组，然后遍历到k个数即可
+         步骤：
+         1）二叉搜索树BST有一个重要性质：中序遍历为排序数组，根据这个性质，我们可将问题转化为寻找中序遍历第k个节点的值；
+         2）实现的方法是建立两个全局变量res和count，分别用于存储答案与计数：
+            在每次访问节点时，计数器-1；
+            当count == 0时，代表已经到达第k个节点，此时记录答案至res；
+         3）找到答案后，已经不用继续遍历，因此每次判断res是否为空，若不为空直接返回。
+
+         */
+        count = k
+        inorder(root)
+        return res
+    }
+    private class func inorder(_ root : TreeNode?){
+        if root != nil{
+            inorder(root?.left)
+            if res != Int.max {
+                return
+            }
+            count -= 1
+            if count == 0{
+                res = (root?.val)!
+            }
+            inorder(root?.right)
+        }
+    }
+    class func kthSmallest2(_ root : TreeNode?, _ k : Int)->Int{
+        /*
+         模拟系统栈的方式：使用二叉树非递归遍历的通用方法
+         */
+        var list : [TreeNode?] = [TreeNode?]()
+        var current  = root
+        var k = k
+        var ans : TreeNode? = nil
+        while k > 0 {
+            while current != nil{
+                list.append(current)
+                current = current?.left
+            }
+            ans = list.removeLast()
+            current = ans?.right
+            
+            k = k-1
+        }
+        return (ans?.val)!
+    }
+    //MARK:-----------2的幂
+    class func isPowerOfTwo(_ n : Int)->Bool{
+        /*
+         二进制：
+         1、数字n若是2的次方，则一定满足以下条件：
+            1）二进制表示下，n最高位为1，其余所有位为0；
+            2）二进制表示下，n - 1最高位为0，其余所有位为1（除了n == 1的情况下，n - 1 == 0，即末位为最高位）；
+            3）n <= 0时一定不是2的次方。
+         2、因此，判断n > 0且n & (n - 1) == 0则可确定n是否是2的次方。
+         */
+        return n>0 && (n & (n-1) == 0)
+    }
+    class func isPowerOfTwo2(_ n : Int)->Bool{
+        /*
+         递归
+         逐步增加除数的大小，每次增加为之前除数的2倍，如果除以除数为0，则除数重新置位2，以递归的方式重新计算
+         */
+        if n == 0 {
+            return false
+        }else{
+            return cal(n)
+        }
+    }
+    private class func cal(_ n : Int)->Bool{
+        var n = n
+        var div = 2
+        while (n/div != 0) && (n%div == 0) {
+            n = n / div
+            div = div*2
+        }
+        if n%2 == 0 {
+            return cal(n)
+        }else if n == 1 {
+            return true
+        }else{
+            return false
+        }
+    }
+    //MARK:----------- 二叉搜索树的最近公共祖先
+    class func lowestCommonAncestor(_ root : TreeNode?, _ p : TreeNode?, _ q : TreeNode?)->TreeNode?{
+        /*
+         二叉搜索树BST的性质：
+         节点N 左子树上的所有节点的值都小于等于节点N 的值
+         节点N 右子树上的所有节点的值都大于等于节点N 的值
+         左子树和右子树也都是 BST
+         
+         递归 O(n)
+         思路：节点p，q 的最近公共祖先（LCA）是距离这两个节点最近的公共祖先节点。在这里 最近 考虑的是节点的深度。
+         算法：
+         从根节点开始遍历树
+         如果节点p 和节点q 都在右子树上，那么以右孩子为根节点继续 1 的操作
+         如果节点p 和节点q 都在左子树上，那么以左孩子为根节点继续 1 的操作
+         如果条件 2 和条件 3 都不成立，这就意味着我们已经找到节p 和节点q 的 LCA 了
+
+         */
+        let parentVal : Int = (root?.val)!
+        let pVal : Int = (p?.val)!
+        let qVal : Int = (q?.val)!
+        
+        if pVal > parentVal && qVal > parentVal {
+            return lowestCommonAncestor(root?.right, p, q)
+        }else if pVal < parentVal && qVal < parentVal{
+            return lowestCommonAncestor(root?.left, p, q)
+        }else{
+            return root
+        }
+    }
+    class func lowestCommonAncestor2(_ root : TreeNode?, _ p : TreeNode?, _ q : TreeNode?)->TreeNode?{
+        /*
+         迭代 O(n)
+         用迭代的方法替代了递归来遍历整棵树
+         */
+        let pVal : Int = (p?.val)!
+        let qVal : Int = (q?.val)!
+        
+        var node = root
+        
+        while node != nil {
+            let parentVal : Int = (node?.val)!
+            //如果节点p 和节点q 都在右子树上，那么以右孩子为根节点继续操作
+            if pVal > parentVal && qVal > parentVal {
+                return lowestCommonAncestor(root?.right, p, q)
+            }else if pVal < parentVal && qVal < parentVal{
+                //如果节点p 和节点q 都在左子树上，那么以左孩子为根节点继续操作
+                return lowestCommonAncestor(root?.left, p, q)
+            }else{
+                return node
+            }
+        }
+        return nil
+    }
     //MARK:-----------
     //MARK:-----------
     //MARK:-----------
     //MARK:-----------
     //MARK:-----------
     //MARK:-----------
-    //MARK:-----------
+}
+//MARK:-----------最小栈
+/*
+ 106ms
+ 1、借用一个辅助栈min_stack，用于存储stack中最小值：
+ push:每当push新值进来时，如果“小于等于”min_stack栈顶值，则一起push到min_stack，即更新了最小值；
+ pop:判断pop出去的元素值是否是min_stack栈顶元素值（即最小值），如果是则将min_stack栈顶元素一起pop，这样可以保证min_stack栈顶元素始终是stack中的最小值。
+ getMin:返回min_stack栈顶即可。
+ 2、min_stack的作用是对stack中的元素做标记，标记的原则是min_stack中元素一定是降序的（栈底最大栈顶最小）。换个角度理解，min_stack等价于遍历stack所有元素，把升序的数字都删除掉，留下一个从栈底到栈顶降序的栈。本题要求获取最小值的复杂度是O(1)，因此须构建辅助栈，在push与pop的过程中始终保持辅助栈为一个降序栈。
+ 3、时间空间复杂度都为O(N)，获取最小值复杂度为O(1)。
+ */
+class MinStack{
+    var stack : IntegerStack
+    var min_stack : IntegerStack
+    
+    init() {
+        stack = IntegerStack()
+        min_stack = IntegerStack()
+    }
+    
+    public func push(_ x : Int){
+        stack.push(x)
+        if min_stack.isEmpty || x<=min_stack.peek! {
+            min_stack.push(x)
+        }
+    }
+    public func pop()->Int{
+        if stack.pop() == min_stack.peek!{
+            return min_stack.pop()!
+        }
+        return stack.pop()!
+    }
+    public func top()->Int{
+        return stack.peek!
+    }
+    public func getMin()->Int{
+        return min_stack.peek!
+    }
+}
+class MinStack2{
+    var stack : [Int]
+    var min_stack : [Int]
+    
+    init() {
+        stack = [Int]()
+        min_stack = [Int]()
+    }
+    
+    public func push(_ x : Int){
+        stack.append(x)
+        if min_stack.isEmpty || x<=min_stack.last! {
+            min_stack.append(x)
+        }
+    }
+    public func pop()->Int{
+        if stack.popLast() == min_stack.last!{
+            return min_stack.popLast()!
+        }
+        return stack.popLast()!
+    }
+    public func top()->Int{
+        return stack.last!
+    }
+    public func getMin()->Int{
+        return min_stack.last!
+    }
+}
+//MARK:-----------栈的实现
+protocol Stack {
+    //持有元素的类型
+    associatedtype Element
+    //是否为空
+    var isEmpty : Bool{get}
+    //栈的大小
+    var size : Int{get}
+    //栈顶元素
+    var peek : Element?{get}
+    //进栈
+    mutating func push(_ newElement : Element)
+    //出栈
+    mutating func pop()->Element?
+}
+//定义一个证书栈
+struct IntegerStack:Stack {
+    typealias Element = Int
+    private var stack = [Element]()
+    
+    var isEmpty: Bool{
+        return stack.isEmpty
+    }
+    
+    var size: Int{
+        return stack.count
+    }
+    
+    var peek: Int?{
+        return stack.last
+    }
+    
+    mutating func push(_ newElement: Int) {
+        stack.append(newElement)
+    }
+    
+    mutating func pop() -> Int? {
+        return stack.popLast()
+    }
+    
+    
+    
+    
 }
 
 //MARK:-----------双链表节点定义
@@ -2159,6 +2809,7 @@ class DoubleList{
 }
 //MARK:-----------LRU缓存机制
 /*
+ 158ms
  LRU 缓存淘汰算法就是一种常用策略。LRU 的全称是 Least Recently Used，也就是说我们认为最近使用过的数据应该是是「有用的」，很久都没用过的数据应该是无用的，内存满了就优先删那些很久没用过的数据。
  
  思想：哈希表+双向链表
@@ -2211,12 +2862,23 @@ class LRUCache{
 
 //MARK:-----------链表节点定义
 public class ListNode{
+    
     public var val : Int
     public var next : ListNode?
     public init(_ val : Int){
         self.val = val
         self.next = nil
     }
+}
+extension ListNode : Equatable{
+    public static func == (lhs: ListNode, rhs: ListNode) -> Bool {
+        if lhs.val == rhs.val && lhs.next == rhs.next {
+            return true
+        }
+        return false
+    }
+    
+    
 }
 //MARK:-----------二叉树节点定义
 public class TreeNode{
@@ -2227,6 +2889,22 @@ public class TreeNode{
         self.val = val
         self.left = nil
         self.right = nil
+    }
+}
+
+//MARK:-----------随机数
+extension Int{
+    /*这是一个内置函数
+     lower : 内置为 0，可根据自己要获取的随机数进行修改。
+     upper : 内置为 UInt32.max 的最大值，这里防止转化越界，造成的崩溃。
+     返回的结果： [lower,upper) 之间的半开半闭区间的数。
+     */
+    public static func randomIntNumber(_ lower : Int = 0, _ upper : Int = Int(UInt32.max))->Int{
+        return lower + Int(arc4random_uniform(UInt32(upper-lower)))
+    }
+    //生成某个区间的随机数
+    public static func randomIntNumber(_ range : Range<Int>)->Int{
+        return randomIntNumber(range.lowerBound, range.upperBound)
     }
 }
 
@@ -2519,5 +3197,188 @@ func algorithmTest(){
     print(cache.get(3))// 返回  3
     print(cache.get(4))// 返回  4
     print(cache.map)
+    print("\n")
+    
+    
+    print("排序链表")
+    let node222 = ListNode(4)
+    let node223 = ListNode(2)
+    let node224 = ListNode(1)
+    let node225 = ListNode(3)
+    node222.next = node223
+    node223.next = node224
+    node224.next = node225
+    node225.next = nil
+    var nodeHead222 = Algorithm.sortList(node222)
+    var nodeHead222Arr = [Int]()
+    while nodeHead222 != nil {
+        nodeHead222Arr.append((nodeHead222?.val)!)
+        nodeHead222 = nodeHead222?.next
+    }
+    print(nodeHead222Arr)
+    let node226 = ListNode(-1)
+    let node227 = ListNode(5)
+    let node228 = ListNode(3)
+    let node229 = ListNode(4)
+    let node230 = ListNode(0)
+    node226.next = node227
+    node227.next = node228
+    node228.next = node229
+    node229.next = node230
+    node230.next = nil
+    var nodeHead226 = Algorithm.sortList(node226)
+    var nodeHead226Arr = [Int]()
+    while nodeHead226 != nil {
+        nodeHead226Arr.append((nodeHead226?.val)!)
+        nodeHead226 = nodeHead226?.next
+    }
+    print(nodeHead226Arr)
+    print("\n")
+    
+    print("最小栈")
+    let minStack = MinStack.init()
+    minStack.push(-2)
+    minStack.push(0)
+    minStack.push(-3)
+    print(minStack.getMin())//--> 返回 -3.
+    minStack.pop()
+    print(minStack.top())//--> 返回 0.
+    print(minStack.getMin())//--> 返回 -2.
+    let minStack2 = MinStack2.init()
+    minStack2.push(-2)
+    minStack2.push(0)
+    minStack2.push(-3)
+    print(minStack2.getMin())//--> 返回 -3.
+    minStack2.pop()
+    print(minStack2.top())//--> 返回 0.
+    print(minStack2.getMin())//--> 返回 -2.
+    print("\n")
+    
+    print("相交链表")
+    let node231 = ListNode(4)//链表A
+    let node232 = ListNode(2)
+    let node233 = ListNode(8)
+    let node234 = ListNode(4)
+    let node235 = ListNode(5)
+    let node236 = ListNode(5)//链表B
+    let node237 = ListNode(0)
+    let node238 = ListNode(1)
+    node231.next = node232
+    node232.next = node233
+    node233.next = node234
+    node234.next = node235
+    node235.next = nil
+    node236.next = node237
+    node237.next = node238
+    node238.next = node233
+    print(Algorithm.getIntersectionNode(node231, node236)?.val)
+//    print(Algorithm.getIntersectionNode2(node231, node236)?.val)
+    print("\n")
+    
+    print("求众数")
+    print(Algorithm.majorityElement([3, 2, 3]))
+    print(Algorithm.majorityElement([2, 2, 1, 1, 1, 2, 2]))
+    print(Algorithm.majorityElement2([3, 2, 3]))
+    print(Algorithm.majorityElement2([2, 2, 1, 1, 1, 2, 2]))
+    print(Algorithm.majorityElement3([3, 2, 3]))
+    print(Algorithm.majorityElement3([2, 2, 1, 1, 1, 2, 2]))
+    print("\n")
+    
+    print("反转链表")
+    let node239 = ListNode(1)
+    let node240 = ListNode(2)
+    let node241 = ListNode(3)
+    let node242 = ListNode(4)
+    let node243 = ListNode(5)
+    node239.next = node240
+    node240.next = node241
+    node241.next = node242
+    node242.next = node243
+    node243.next = nil
+//    var head243 = Algorithm.reverseList(node239)
+    var head243 = Algorithm.reverseList2(node239)
+    var arr243 = [Int]()
+    while head243 != nil {
+        arr243.append((head243?.val)!)
+        head243 = head243?.next
+    }
+    print(arr243)
+    print("\n")
+    
+    print("数组中的第k个最大元素")
+    print(Algorithm.findKthLargest([3, 2, 1, 5, 6, 4], 2))
+    print(Algorithm.findKthLargest([3, 2, 3, 1, 2, 4, 5, 5, 6], 4))
+    print(Algorithm.findKthLargest1([3, 2, 1, 5, 6, 4], 2))
+    print(Algorithm.findKthLargest1([3, 2, 3, 1, 2, 4, 5, 5, 6], 4))
+    print("\n")
+    
+    print("存在重复元素")
+    print(Algorithm.containsDuplicate([1, 2, 3, 1]))
+    print(Algorithm.containsDuplicate([1, 2, 3, 4]))
+    print(Algorithm.containsDuplicate([1, 1, 1, 3, 3, 4, 3, 2, 4, 2]))
+    print(Algorithm.containsDuplicate1([1, 2, 3, 1]))
+    print(Algorithm.containsDuplicate1([1, 2, 3, 4]))
+    print(Algorithm.containsDuplicate1([1, 1, 1, 3, 3, 4, 3, 2, 4, 2]))
+    print(Algorithm.containsDuplicate2([1, 2, 3, 1]))
+    print(Algorithm.containsDuplicate2([1, 2, 3, 4]))
+    print(Algorithm.containsDuplicate2([1, 1, 1, 3, 3, 4, 3, 2, 4, 2]))
+    print("\n")
+    
+    print("二叉搜索树中第k小的元素")
+    let treeN14 = TreeNode(3)
+    let treeN15 = TreeNode(1)
+    let treeN16 = TreeNode(4)
+    let treeN17 = TreeNode(2)
+    treeN14.left = treeN15
+    treeN14.right = treeN16
+    treeN15.right = treeN17
+    print(Algorithm.kthSmallest(treeN14, 1))
+    print(Algorithm.kthSmallest2(treeN14, 1))
+    let treeN18 = TreeNode(5)
+    let treeN19 = TreeNode(3)
+    let treeN20 = TreeNode(6)
+    let treeN21 = TreeNode(2)
+    let treeN22 = TreeNode(4)
+    let treeN23 = TreeNode(1)
+    treeN18.left = treeN19
+    treeN18.right = treeN20
+    treeN19.left = treeN21
+    treeN19.right = treeN22
+    treeN21.left = treeN23
+//    print(Algorithm.kthSmallest(treeN18, 3))
+    print(Algorithm.kthSmallest2(treeN18, 3))
+    print("\n")
+    
+    print("2的幂")
+    print(Algorithm.isPowerOfTwo(1))
+    print(Algorithm.isPowerOfTwo(16))
+    print(Algorithm.isPowerOfTwo(218))
+    print(Algorithm.isPowerOfTwo2(1))
+    print(Algorithm.isPowerOfTwo2(16))
+    print(Algorithm.isPowerOfTwo2(218))
+    print("\n")
+    
+    print("二叉搜索树的最近公共祖先")
+    let treeN24 = TreeNode(6)
+    let treeN25 = TreeNode(2)
+    let treeN26 = TreeNode(8)
+    let treeN27 = TreeNode(0)
+    let treeN28 = TreeNode(4)
+    let treeN29 = TreeNode(7)
+    let treeN30 = TreeNode(9)
+    let treeN31 = TreeNode(3)
+    let treeN32 = TreeNode(5)
+    treeN24.left = treeN25
+    treeN24.right = treeN26
+    treeN25.left = treeN27
+    treeN25.right = treeN28
+    treeN26.left = treeN29
+    treeN26.right = treeN30
+    treeN28.left = treeN31
+    treeN28.right = treeN32
+    print(Algorithm.lowestCommonAncestor(treeN24, treeN25, treeN26)?.val)
+    print(Algorithm.lowestCommonAncestor(treeN24, treeN25, treeN28)?.val)
+    print(Algorithm.lowestCommonAncestor2(treeN24, treeN25, treeN26)?.val)
+    print(Algorithm.lowestCommonAncestor2(treeN24, treeN25, treeN28)?.val)
     print("\n")
 }

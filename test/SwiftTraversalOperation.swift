@@ -155,7 +155,7 @@ func TraversalTest(){
     var array = swiftArray[0...4]
     print(array)
     //删除“O”
-    array = array.filter { $0 != "O"  }
+//    array = array.filter { $0 != "O"  }
     print(array)
 }
 

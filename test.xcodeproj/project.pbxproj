@@ -35,6 +35,14 @@
 		0A0F21D022B395C60010D70C /* BullsEyeMockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0F21CF22B395C60010D70C /* BullsEyeMockTests.swift */; };
 		0A19D08622B1F514002CD08E /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A19D08522B1F514002CD08E /* Nimble.framework */; };
 		0A19D08822B1F517002CD08E /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A19D08722B1F517002CD08E /* Quick.framework */; };
+		0A1B0B0A22DF05AA00FCDF5B /* SMLagMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1B0B0922DF05AA00FCDF5B /* SMLagMonitor.m */; };
+		0A1B0B0D22DF069900FCDF5B /* SMCPUMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1B0B0C22DF069900FCDF5B /* SMCPUMonitor.m */; };
+		0A1B0B1122DF088200FCDF5B /* SMLagDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1B0B1022DF088200FCDF5B /* SMLagDB.m */; };
+		0A1B0B1522DF0CAD00FCDF5B /* SMCallTraceTimeCostModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1B0B1422DF0CAD00FCDF5B /* SMCallTraceTimeCostModel.m */; };
+		0A1B0B1922DF103400FCDF5B /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A1B0B1822DF103400FCDF5B /* FMDB.framework */; };
+		0A1B0B1B22DF103400FCDF5B /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A1B0B1A22DF103400FCDF5B /* ReactiveCocoa.framework */; };
+		0A1B0B1E22DF198900FCDF5B /* SMCallStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1B0B1D22DF198900FCDF5B /* SMCallStack.m */; };
+		0A1B0B2122DF199C00FCDF5B /* SMCallLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1B0B2022DF199C00FCDF5B /* SMCallLib.m */; };
 		0A1E6FD022C0C9DB00AEFB5B /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E6FCE22C0C9DB00AEFB5B /* AddViewController.swift */; };
 		0A1E6FD122C0C9DB00AEFB5B /* AddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A1E6FCF22C0C9DB00AEFB5B /* AddViewController.xib */; };
 		0A1E6FD522C0CA4C00AEFB5B /* AddReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E6FD322C0CA4C00AEFB5B /* AddReviewViewController.swift */; };
@@ -68,12 +76,23 @@
 		0A57477922C9EBFF00A8BA6D /* CompleteCaseReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A57477822C9EBFF00A8BA6D /* CompleteCaseReview.swift */; };
 		0A57477B22CA100300A8BA6D /* DesignPatterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A57477A22CA100300A8BA6D /* DesignPatterns.swift */; };
 		0A64DEAE22D429F00003B15D /* SwiftTraversalOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A64DEAD22D429F00003B15D /* SwiftTraversalOperation.swift */; };
+		0A67C87422E97CEE00E20D11 /* BatteryMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A67C87322E97CEE00E20D11 /* BatteryMonitor.m */; };
+		0A67C89922E981D600E20D11 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A67C89822E981D600E20D11 /* IOKit.framework */; };
+		0A73E6AB22EA9DA3003C8627 /* Command Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A73E6AA22EA9DA3003C8627 /* Command Pattern.swift */; };
+		0A73E6AD22EA9FE2003C8627 /* 命令模式.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A73E6AC22EA9FE2003C8627 /* 命令模式.png */; };
+		0A73E6AF22EAFB66003C8627 /* Head First Design Patterns_设计模式.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0A73E6AE22EAFB66003C8627 /* Head First Design Patterns_设计模式.pdf */; };
+		0A86028D22E59B9E00A4E73A /* SMFPSMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A86028C22E59B9E00A4E73A /* SMFPSMonitor.m */; };
+		0A86029122E5A0B100A4E73A /* SMMemoryMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A86029022E5A0B100A4E73A /* SMMemoryMonitor.m */; };
+		0A86029422E6DAE300A4E73A /* Singleton Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A86029322E6DAE200A4E73A /* Singleton Pattern.swift */; };
 		0AB4143622D865E300AC9570 /* FactoryPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4143522D865E300AC9570 /* FactoryPattern.swift */; };
 		0AB4143822D868B600AC9570 /* 无工厂模式.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB4143722D868B600AC9570 /* 无工厂模式.png */; };
 		0AB4143A22D86FCD00AC9570 /* 简单工厂模式.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB4143922D86FCD00AC9570 /* 简单工厂模式.png */; };
 		0AB4143C22D86FD300AC9570 /* 工厂方法模式.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB4143B22D86FD300AC9570 /* 工厂方法模式.png */; };
 		0AB4143E22D87B5100AC9570 /* 抽象工厂模式.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB4143D22D87B5000AC9570 /* 抽象工厂模式.png */; };
 		0AB4144022D87EEC00AC9570 /* 抽象工厂+工厂方法模式.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AB4143F22D87EEC00AC9570 /* 抽象工厂+工厂方法模式.png */; };
+		0AB4144322DC1CEF00AC9570 /* SMHook.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4144222DC1CEE00AC9570 /* SMHook.m */; };
+		0AB4144722DC1FA600AC9570 /* UIViewController+logger.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4144622DC1FA600AC9570 /* UIViewController+logger.m */; };
+		0AB4144A22DC296D00AC9570 /* UIButton+logger.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4144922DC296D00AC9570 /* UIButton+logger.m */; };
 		0AC6A79722B9E96500C98F79 /* MockDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC6A79622B9E96500C98F79 /* MockDemoTests.m */; };
 		0AC6A79922B9E9EE00C98F79 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC6A79822B9E9EE00C98F79 /* Person.swift */; };
 		0AD617AF22B736A70007B7E1 /* test1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD617AE22B736A70007B7E1 /* test1UITests.swift */; };
@@ -81,6 +100,7 @@
 		0AD617BD22B774AA0007B7E1 /* Scene2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD617BA22B774AA0007B7E1 /* Scene2ViewController.swift */; };
 		0AD617BE22B774AA0007B7E1 /* Scene1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD617BB22B774AA0007B7E1 /* Scene1ViewController.swift */; };
 		0AD617C122B775B50007B7E1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD617C022B775B50007B7E1 /* LoginViewController.swift */; };
+		0AE8BC9622E9902400AEBBBD /* BatteryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8BC9522E9902400AEBBBD /* BatteryMonitor.swift */; };
 		0AF7468422B8CA7F00209A2B /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF7468322B8CA7F00209A2B /* OHHTTPStubs.framework */; };
 		0AF7468C22B8DE6C00209A2B /* abbaData.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AF7468B22B8DE6C00209A2B /* abbaData.json */; };
 		0AFCEC9F22BB7EC3007C83D2 /* Dolphin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFCEC9E22BB7EC3007C83D2 /* Dolphin.swift */; };
@@ -175,6 +195,20 @@
 		0A19D07722B1E8A3002CD08E /* test-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "test-Bridging-Header.h"; sourceTree = "<group>"; };
 		0A19D08522B1F514002CD08E /* Nimble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Nimble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A19D08722B1F517002CD08E /* Quick.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Quick.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A1B0B0822DF05AA00FCDF5B /* SMLagMonitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMLagMonitor.h; sourceTree = "<group>"; };
+		0A1B0B0922DF05AA00FCDF5B /* SMLagMonitor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMLagMonitor.m; sourceTree = "<group>"; };
+		0A1B0B0B22DF069900FCDF5B /* SMCPUMonitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMCPUMonitor.h; sourceTree = "<group>"; };
+		0A1B0B0C22DF069900FCDF5B /* SMCPUMonitor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMCPUMonitor.m; sourceTree = "<group>"; };
+		0A1B0B0F22DF088200FCDF5B /* SMLagDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMLagDB.h; sourceTree = "<group>"; };
+		0A1B0B1022DF088200FCDF5B /* SMLagDB.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMLagDB.m; sourceTree = "<group>"; };
+		0A1B0B1322DF0CAD00FCDF5B /* SMCallTraceTimeCostModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMCallTraceTimeCostModel.h; sourceTree = "<group>"; };
+		0A1B0B1422DF0CAD00FCDF5B /* SMCallTraceTimeCostModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMCallTraceTimeCostModel.m; sourceTree = "<group>"; };
+		0A1B0B1822DF103400FCDF5B /* FMDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FMDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A1B0B1A22DF103400FCDF5B /* ReactiveCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ReactiveCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A1B0B1C22DF198900FCDF5B /* SMCallStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMCallStack.h; sourceTree = "<group>"; };
+		0A1B0B1D22DF198900FCDF5B /* SMCallStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMCallStack.m; sourceTree = "<group>"; };
+		0A1B0B1F22DF199C00FCDF5B /* SMCallLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMCallLib.h; sourceTree = "<group>"; };
+		0A1B0B2022DF199C00FCDF5B /* SMCallLib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMCallLib.m; sourceTree = "<group>"; };
 		0A1E6FCE22C0C9DB00AEFB5B /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		0A1E6FCF22C0C9DB00AEFB5B /* AddViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddViewController.xib; sourceTree = "<group>"; };
 		0A1E6FD322C0CA4C00AEFB5B /* AddReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewViewController.swift; sourceTree = "<group>"; };
@@ -211,12 +245,31 @@
 		0A57477822C9EBFF00A8BA6D /* CompleteCaseReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteCaseReview.swift; sourceTree = "<group>"; };
 		0A57477A22CA100300A8BA6D /* DesignPatterns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignPatterns.swift; sourceTree = "<group>"; };
 		0A64DEAD22D429F00003B15D /* SwiftTraversalOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTraversalOperation.swift; sourceTree = "<group>"; };
+		0A67C87222E97CEE00E20D11 /* BatteryMonitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BatteryMonitor.h; sourceTree = "<group>"; };
+		0A67C87322E97CEE00E20D11 /* BatteryMonitor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BatteryMonitor.m; sourceTree = "<group>"; };
+		0A67C89822E981D600E20D11 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Framework/IOKit.framework; sourceTree = "<group>"; };
+		0A67C89A22E982B200E20D11 /* IOPowerSources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IOPowerSources.h; path = Framework/IOKit.framework/Versions/A/Headers/ps/IOPowerSources.h; sourceTree = SOURCE_ROOT; };
+		0A67C89B22E982B200E20D11 /* IOPSKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IOPSKeys.h; path = Framework/IOKit.framework/Versions/A/Headers/ps/IOPSKeys.h; sourceTree = SOURCE_ROOT; };
+		0A73E6AA22EA9DA3003C8627 /* Command Pattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Command Pattern.swift"; sourceTree = "<group>"; };
+		0A73E6AC22EA9FE2003C8627 /* 命令模式.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "命令模式.png"; sourceTree = "<group>"; };
+		0A73E6AE22EAFB66003C8627 /* Head First Design Patterns_设计模式.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Head First Design Patterns_设计模式.pdf"; path = "book/Head First Design Patterns_设计模式.pdf"; sourceTree = SOURCE_ROOT; };
+		0A86028B22E59B9E00A4E73A /* SMFPSMonitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMFPSMonitor.h; sourceTree = "<group>"; };
+		0A86028C22E59B9E00A4E73A /* SMFPSMonitor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMFPSMonitor.m; sourceTree = "<group>"; };
+		0A86028F22E5A0B100A4E73A /* SMMemoryMonitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMMemoryMonitor.h; sourceTree = "<group>"; };
+		0A86029022E5A0B100A4E73A /* SMMemoryMonitor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMMemoryMonitor.m; sourceTree = "<group>"; };
+		0A86029322E6DAE200A4E73A /* Singleton Pattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Singleton Pattern.swift"; sourceTree = "<group>"; };
 		0AB4143522D865E300AC9570 /* FactoryPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryPattern.swift; sourceTree = "<group>"; };
 		0AB4143722D868B600AC9570 /* 无工厂模式.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "无工厂模式.png"; sourceTree = "<group>"; };
 		0AB4143922D86FCD00AC9570 /* 简单工厂模式.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "简单工厂模式.png"; sourceTree = "<group>"; };
 		0AB4143B22D86FD300AC9570 /* 工厂方法模式.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "工厂方法模式.png"; sourceTree = "<group>"; };
 		0AB4143D22D87B5000AC9570 /* 抽象工厂模式.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "抽象工厂模式.png"; sourceTree = "<group>"; };
 		0AB4143F22D87EEC00AC9570 /* 抽象工厂+工厂方法模式.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "抽象工厂+工厂方法模式.png"; sourceTree = "<group>"; };
+		0AB4144122DC1CEE00AC9570 /* SMHook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMHook.h; sourceTree = "<group>"; };
+		0AB4144222DC1CEE00AC9570 /* SMHook.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMHook.m; sourceTree = "<group>"; };
+		0AB4144522DC1FA600AC9570 /* UIViewController+logger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+logger.h"; sourceTree = "<group>"; };
+		0AB4144622DC1FA600AC9570 /* UIViewController+logger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+logger.m"; sourceTree = "<group>"; };
+		0AB4144822DC296D00AC9570 /* UIButton+logger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+logger.h"; sourceTree = "<group>"; };
+		0AB4144922DC296D00AC9570 /* UIButton+logger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+logger.m"; sourceTree = "<group>"; };
 		0AC6A79622B9E96500C98F79 /* MockDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MockDemoTests.m; sourceTree = "<group>"; };
 		0AC6A79822B9E9EE00C98F79 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		0AC6A79D22BA106F00C98F79 /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
@@ -235,6 +288,7 @@
 		0AD617BA22B774AA0007B7E1 /* Scene2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene2ViewController.swift; sourceTree = "<group>"; };
 		0AD617BB22B774AA0007B7E1 /* Scene1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene1ViewController.swift; sourceTree = "<group>"; };
 		0AD617C022B775B50007B7E1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0AE8BC9522E9902400AEBBBD /* BatteryMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryMonitor.swift; sourceTree = "<group>"; };
 		0AF7468322B8CA7F00209A2B /* OHHTTPStubs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = OHHTTPStubs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AF7468922B8D91D00209A2B /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AF7468B22B8DE6C00209A2B /* abbaData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = abbaData.json; path = testSimulationObjectsTests/abbaData.json; sourceTree = SOURCE_ROOT; };
@@ -257,6 +311,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A67C89922E981D600E20D11 /* IOKit.framework in Frameworks */,
+				0A1B0B1922DF103400FCDF5B /* FMDB.framework in Frameworks */,
+				0A1B0B1B22DF103400FCDF5B /* ReactiveCocoa.framework in Frameworks */,
 				96495EDA75960C3F0AC7C859 /* Pods_test.framework in Frameworks */,
 				0A488BF022B9D46600CA6BA7 /* libOCMock.a in Frameworks */,
 			);
@@ -317,6 +374,9 @@
 		0913B391112ABE73FD6E9763 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A67C89822E981D600E20D11 /* IOKit.framework */,
+				0A1B0B1822DF103400FCDF5B /* FMDB.framework */,
+				0A1B0B1A22DF103400FCDF5B /* ReactiveCocoa.framework */,
 				0AF7468922B8D91D00209A2B /* SwiftyJSON.framework */,
 				0AF7468322B8CA7F00209A2B /* OHHTTPStubs.framework */,
 				0AD617B722B76AFB0007B7E1 /* KIF.framework */,
@@ -366,10 +426,14 @@
 		0A0CBD7C2283BF1800DFBB82 /* test */ = {
 			isa = PBXGroup;
 			children = (
+				0A73E6AE22EAFB66003C8627 /* Head First Design Patterns_设计模式.pdf */,
 				0A0CBD7D2283BF1800DFBB82 /* AppDelegate.swift */,
 				0A0CBD7F2283BF1800DFBB82 /* ViewController.swift */,
 				0A0F218922B2206B0010D70C /* ProjectClass.swift */,
 				0A64DEAD22D429F00003B15D /* SwiftTraversalOperation.swift */,
+				0A67C87522E97CF400E20D11 /* BatteryMonitor */,
+				0A1B0B1722DF0F3A00FCDF5B /* LagMonitor */,
+				0AB4144422DC1D0500AC9570 /* SMHook */,
 				0A57477C22CA100A00A8BA6D /* DesignPatterns */,
 				0AD617BF22B774CB0007B7E1 /* KIFDemo */,
 				0A0F21D722B39F450010D70C /* Movies */,
@@ -490,6 +554,51 @@
 			path = Movies;
 			sourceTree = "<group>";
 		};
+		0A1B0B0E22DF070300FCDF5B /* SMCPUMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				0A1B0B0B22DF069900FCDF5B /* SMCPUMonitor.h */,
+				0A1B0B0C22DF069900FCDF5B /* SMCPUMonitor.m */,
+			);
+			path = SMCPUMonitor;
+			sourceTree = "<group>";
+		};
+		0A1B0B1222DF088800FCDF5B /* SMLagDB */ = {
+			isa = PBXGroup;
+			children = (
+				0A1B0B0F22DF088200FCDF5B /* SMLagDB.h */,
+				0A1B0B1022DF088200FCDF5B /* SMLagDB.m */,
+			);
+			path = SMLagDB;
+			sourceTree = "<group>";
+		};
+		0A1B0B1622DF0F2B00FCDF5B /* SMCall */ = {
+			isa = PBXGroup;
+			children = (
+				0A1B0B1322DF0CAD00FCDF5B /* SMCallTraceTimeCostModel.h */,
+				0A1B0B1422DF0CAD00FCDF5B /* SMCallTraceTimeCostModel.m */,
+				0A1B0B1C22DF198900FCDF5B /* SMCallStack.h */,
+				0A1B0B1D22DF198900FCDF5B /* SMCallStack.m */,
+				0A1B0B1F22DF199C00FCDF5B /* SMCallLib.h */,
+				0A1B0B2022DF199C00FCDF5B /* SMCallLib.m */,
+			);
+			path = SMCall;
+			sourceTree = "<group>";
+		};
+		0A1B0B1722DF0F3A00FCDF5B /* LagMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				0A1B0B0822DF05AA00FCDF5B /* SMLagMonitor.h */,
+				0A1B0B0922DF05AA00FCDF5B /* SMLagMonitor.m */,
+				0A1B0B1622DF0F2B00FCDF5B /* SMCall */,
+				0A1B0B1222DF088800FCDF5B /* SMLagDB */,
+				0A1B0B0E22DF070300FCDF5B /* SMCPUMonitor */,
+				0A86028E22E59BA400A4E73A /* SMFPSMonitor */,
+				0A86029222E5A0B800A4E73A /* SMMemoryMonitor */,
+			);
+			path = LagMonitor;
+			sourceTree = "<group>";
+		};
 		0A1E6FD222C0C9E800AEFB5B /* ReviewUIDemo */ = {
 			isa = PBXGroup;
 			children = (
@@ -534,8 +643,54 @@
 				0AB4143B22D86FD300AC9570 /* 工厂方法模式.png */,
 				0AB4143D22D87B5000AC9570 /* 抽象工厂模式.png */,
 				0AB4143F22D87EEC00AC9570 /* 抽象工厂+工厂方法模式.png */,
+				0A86029322E6DAE200A4E73A /* Singleton Pattern.swift */,
+				0A73E6AA22EA9DA3003C8627 /* Command Pattern.swift */,
+				0A73E6AC22EA9FE2003C8627 /* 命令模式.png */,
 			);
 			path = DesignPatterns;
+			sourceTree = "<group>";
+		};
+		0A67C87522E97CF400E20D11 /* BatteryMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				0A67C89A22E982B200E20D11 /* IOPowerSources.h */,
+				0A67C89B22E982B200E20D11 /* IOPSKeys.h */,
+				0A67C87222E97CEE00E20D11 /* BatteryMonitor.h */,
+				0A67C87322E97CEE00E20D11 /* BatteryMonitor.m */,
+				0AE8BC9522E9902400AEBBBD /* BatteryMonitor.swift */,
+			);
+			path = BatteryMonitor;
+			sourceTree = "<group>";
+		};
+		0A86028E22E59BA400A4E73A /* SMFPSMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				0A86028B22E59B9E00A4E73A /* SMFPSMonitor.h */,
+				0A86028C22E59B9E00A4E73A /* SMFPSMonitor.m */,
+			);
+			path = SMFPSMonitor;
+			sourceTree = "<group>";
+		};
+		0A86029222E5A0B800A4E73A /* SMMemoryMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				0A86028F22E5A0B100A4E73A /* SMMemoryMonitor.h */,
+				0A86029022E5A0B100A4E73A /* SMMemoryMonitor.m */,
+			);
+			path = SMMemoryMonitor;
+			sourceTree = "<group>";
+		};
+		0AB4144422DC1D0500AC9570 /* SMHook */ = {
+			isa = PBXGroup;
+			children = (
+				0AB4144122DC1CEE00AC9570 /* SMHook.h */,
+				0AB4144222DC1CEE00AC9570 /* SMHook.m */,
+				0AB4144522DC1FA600AC9570 /* UIViewController+logger.h */,
+				0AB4144622DC1FA600AC9570 /* UIViewController+logger.m */,
+				0AB4144822DC296D00AC9570 /* UIButton+logger.h */,
+				0AB4144922DC296D00AC9570 /* UIButton+logger.m */,
+			);
+			path = SMHook;
 			sourceTree = "<group>";
 		};
 		0AC6A79C22BA106F00C98F79 /* OCMock */ = {
@@ -793,6 +948,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A0CBD882283BF1B00DFBB82 /* LaunchScreen.storyboard in Resources */,
+				0A73E6AD22EA9FE2003C8627 /* 命令模式.png in Resources */,
 				0AF7468C22B8DE6C00209A2B /* abbaData.json in Resources */,
 				0AB4143E22D87B5100AC9570 /* 抽象工厂模式.png in Resources */,
 				0A1E6FD622C0CA4C00AEFB5B /* AddReviewViewController.xib in Resources */,
@@ -808,6 +964,7 @@
 				0A0CBD832283BF1800DFBB82 /* Main.storyboard in Resources */,
 				0AB4143A22D86FCD00AC9570 /* 简单工厂模式.png in Resources */,
 				0A23BF9F22CCAC180050664A /* Foundation自带的通知模式.png in Resources */,
+				0A73E6AF22EAFB66003C8627 /* Head First Design Patterns_设计模式.pdf in Resources */,
 				0A23BF9D22CC8A830050664A /* 观察者模式.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -890,7 +1047,9 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-test/Pods-test-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/OHHTTPStubs/OHHTTPStubs.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -898,7 +1057,9 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OHHTTPStubs.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1011,34 +1172,49 @@
 				0AD617BC22B774AA0007B7E1 /* Scene3ViewController.swift in Sources */,
 				0A1E6FD022C0C9DB00AEFB5B /* AddViewController.swift in Sources */,
 				0A4C31C6229F7051005C1D1E /* SortClass.swift in Sources */,
+				0A86028D22E59B9E00A4E73A /* SMFPSMonitor.m in Sources */,
+				0AB4144322DC1CEF00AC9570 /* SMHook.m in Sources */,
 				0A0F21A922B387B70010D70C /* DHURLSessionMock.swift in Sources */,
 				0A4C31C822A4F51D005C1D1E /* CodeReviewRegular.swift in Sources */,
 				0A1E6FD522C0CA4C00AEFB5B /* AddReviewViewController.swift in Sources */,
 				0A0F218422B1FDA30010D70C /* MoviesTableViewController.swift in Sources */,
+				0A1B0B1522DF0CAD00FCDF5B /* SMCallTraceTimeCostModel.m in Sources */,
 				0A0F21A622B3879E0010D70C /* Track.swift in Sources */,
 				0A0F21C622B392970010D70C /* BullsEyeGameViewController.swift in Sources */,
 				0A4C31C4229BA10F005C1D1E /* SearchSummary.swift in Sources */,
 				0A57477922C9EBFF00A8BA6D /* CompleteCaseReview.swift in Sources */,
 				0A504CFC22A7B0A1004C2F2E /* DataReview.swift in Sources */,
+				0AB4144722DC1FA600AC9570 /* UIViewController+logger.m in Sources */,
 				0A504CFA22A65E51004C2F2E /* ClassReview.swift in Sources */,
 				0A57477722C4CB1F00A8BA6D /* ExtendsReview.swift in Sources */,
 				0A4C31C2229BA00D005C1D1E /* SortSummary.swift in Sources */,
 				0A504CF822A65C07004C2F2E /* MethodReview.swift in Sources */,
+				0A1B0B0D22DF069900FCDF5B /* SMCPUMonitor.m in Sources */,
 				0A0F21A722B3879E0010D70C /* SearchViewController.swift in Sources */,
+				0A1B0B1122DF088200FCDF5B /* SMLagDB.m in Sources */,
 				0AD617BE22B774AA0007B7E1 /* Scene1ViewController.swift in Sources */,
+				0A86029422E6DAE300A4E73A /* Singleton Pattern.swift in Sources */,
 				0A0F21A522B3879E0010D70C /* Download.swift in Sources */,
 				0A0F21A122B387800010D70C /* TrackCell.swift in Sources */,
+				0A67C87422E97CEE00E20D11 /* BatteryMonitor.m in Sources */,
 				0A23BFA322CE05DF0050664A /* DecoratorPattern.swift in Sources */,
 				0A370F4C229787A100EF9AC2 /* BinaryTree.swift in Sources */,
+				0A86029122E5A0B100A4E73A /* SMMemoryMonitor.m in Sources */,
+				0AB4144A22DC296D00AC9570 /* UIButton+logger.m in Sources */,
+				0A73E6AB22EA9DA3003C8627 /* Command Pattern.swift in Sources */,
 				0A370F4A2296A3EE00EF9AC2 /* GeneralTree.swift in Sources */,
 				0A0CBD802283BF1800DFBB82 /* ViewController.swift in Sources */,
 				0A57477522C4CB0000A8BA6D /* ConditionReview.swift in Sources */,
 				0A64DEAE22D429F00003B15D /* SwiftTraversalOperation.swift in Sources */,
+				0A1B0B1E22DF198900FCDF5B /* SMCallStack.m in Sources */,
 				0A0F219022B3753C0010D70C /* BullsEyeGame.swift in Sources */,
+				0A1B0B2122DF199C00FCDF5B /* SMCallLib.m in Sources */,
 				0A57477B22CA100300A8BA6D /* DesignPatterns.swift in Sources */,
+				0AE8BC9622E9902400AEBBBD /* BatteryMonitor.swift in Sources */,
 				0AB4143622D865E300AC9570 /* FactoryPattern.swift in Sources */,
 				0AD617BD22B774AA0007B7E1 /* Scene2ViewController.swift in Sources */,
 				0A23BF9922CB01D30050664A /* StrategyPattern.swift in Sources */,
+				0A1B0B0A22DF05AA00FCDF5B /* SMLagMonitor.m in Sources */,
 				0A23BF9B22CB30110050664A /* ObservePattern.swift in Sources */,
 				0A0CBD7E2283BF1800DFBB82 /* AppDelegate.swift in Sources */,
 				0A0F218A22B2206B0010D70C /* ProjectClass.swift in Sources */,
@@ -1287,8 +1463,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EEC49VMBA9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Framework",
+				);
 				INFOPLIST_FILE = test/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_GENERATE_MAP_FILE = YES;
+				LD_MAP_FILE_PATH = "/Users/jialinchen/Desktop/test/linkmap/$(PRODUCT_NAME)-LinkMap-$(CURRENT_VARIANT)-$(CURRENT_ARCH).txt";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1302,7 +1484,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "test/test-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1315,8 +1497,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EEC49VMBA9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Framework",
+				);
 				INFOPLIST_FILE = test/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_GENERATE_MAP_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1329,7 +1516,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.cjl.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "test/test-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

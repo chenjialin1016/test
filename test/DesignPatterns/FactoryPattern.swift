@@ -287,3 +287,258 @@ class GermanyWeaponUser5:WeaponUserType{
         return GermangWeaponFactory()
     }
 }
+
+
+//MARK:------实例2 披萨
+//MARK:------1、无工厂的披萨
+//pizza的种类
+protocol PizzaType {
+    func description()
+}
+class CheesePizza : PizzaType{
+    func description() {
+        print("CheesePizza")
+    }
+}
+class GreekPizza : PizzaType{
+    func description() {
+        print("GreekPizza")
+    }
+}
+class PepperoniPizza : PizzaType{
+    func description() {
+        print("PepperoniPizza")
+    }
+}
+//pizza的类型枚举
+enum PizzaTypeEnumeration{
+    case Cheese, Greek, Pepperoni
+}
+class PizzaStore {
+    func orderPizza(_ type : PizzaTypeEnumeration){
+        var pizza : PizzaType
+        
+        switch type {
+        case .Cheese:
+            pizza = CheesePizza()
+        case .Greek:
+            pizza = GreekPizza()
+        case .Pepperoni:
+            pizza = PepperoniPizza()
+        }
+        pizza.description()
+    }
+}
+
+//需求：现在需要增加Pizza的种类，如果直接修改OrderPizza，会违背 对扩展开放，修改关闭的原则，所以需要封装 改变的部分
+//MARK:------2、简单工厂模式
+class ClamPizza : PizzaType{
+    func description() {
+        print("ClamPizza")
+    }
+}
+class VeggiePizza : PizzaType{
+    func description() {
+        print("VeggiePizza")
+    }
+}
+enum PizzaTypeEnumeration2{
+    //去掉了greek，增加了clam、veggie种类
+    case Cheese, Pepperoni, Clam, Veggie
+}
+//将switch变化的部分封装为 简单工厂模式
+class SimplePizzaFactory{
+    func createPizza(_ type : PizzaTypeEnumeration2)->PizzaType{
+        var pizza : PizzaType
+        switch type {
+        case .Cheese:
+            pizza = CheesePizza()
+        case .Pepperoni:
+            pizza = PepperoniPizza()
+        case .Clam:
+            pizza = ClamPizza()
+        case .Veggie:
+            pizza = VeggiePizza()
+        }
+        return pizza
+    }
+}
+//重做pizzastore 类
+class PizzaStore2 {
+    
+    //创建简单工厂的引用
+    var factory : SimplePizzaFactory
+    
+    //初始化简单工厂
+    init(_ factory : SimplePizzaFactory) {
+        self.factory = factory
+    }
+    
+    func orderPizza(_ type : PizzaTypeEnumeration2){
+        var pizza : PizzaType
+        
+        //通过简单工厂对象传入pizza类型
+        pizza = factory.createPizza(type)
+        
+        pizza.description()
+    }
+}
+//MARK:------3、工厂方法模式
+//需求：由于披萨店经营有成，大家希望自家附近能有加盟店，但是每个地区的提供的披萨类型有所差异，如果利用简答工厂模式推广，会有一个问题就是 确实是采用你的工厂模式创建披萨，而采用的流程确是他们自创的，
+//我们希望能够建立一个框架，把加盟店和创建披萨捆绑在一起的同时又保持一定的弹性，意思就是披萨的口类类型可以不一致，但是余下的烘烤、切片等步骤需要一致
+//披萨增加装饰
+class PizzaTypeDecorator:PizzaType{
+    
+    
+    var pizza : PizzaType? = nil
+    init(_ pizza : PizzaType) {
+        self.pizza = pizza
+    }
+    
+    func description() {
+        self.pizza!.description()
+    }
+}
+//纽约风味披萨
+class NYPizzaDecorator : PizzaTypeDecorator{
+    override func description() {
+        print("纽约风味：")
+        self.pizza?.description()
+    }
+}
+
+//芝加哥风味披萨
+class ZJGPizzaDecorator : PizzaTypeDecorator{
+    override func description() {
+        print("芝加哥风味：")
+        self.pizza?.description()
+    }
+}
+
+protocol PizzaStore3 {
+    func orderPizza(_ type : PizzaTypeEnumeration2)
+    func createPizza(_ type : PizzaTypeEnumeration2)->PizzaType
+}
+//实现orderPizza的默认实现
+extension PizzaStore3{
+    func orderPizza(_ type : PizzaTypeEnumeration2){
+        var pizza : PizzaType
+        pizza = createPizza(type)
+        
+        pizza.description()
+    }
+}
+//让子类决定如何制造披萨
+class NYStylePizzaStore:PizzaStore3{
+    func createPizza(_ type: PizzaTypeEnumeration2) -> PizzaType {
+        var pizza : PizzaType
+        switch type {
+        case .Cheese:
+            pizza = NYPizzaDecorator.init(CheesePizza())
+        case .Pepperoni:
+            pizza = NYPizzaDecorator.init(PepperoniPizza())
+        case .Clam:
+            pizza = NYPizzaDecorator.init(ClamPizza())
+        case .Veggie:
+            pizza = NYPizzaDecorator.init(VeggiePizza())
+        }
+        return pizza
+    }
+}
+class ZJGStylePizzaStore:PizzaStore3{
+    func createPizza(_ type: PizzaTypeEnumeration2) -> PizzaType {
+        var pizza : PizzaType
+        switch type {
+        case .Cheese:
+            pizza = ZJGPizzaDecorator.init(CheesePizza())
+        case .Pepperoni:
+            pizza = ZJGPizzaDecorator.init(PepperoniPizza())
+        case .Clam:
+            pizza = ZJGPizzaDecorator.init(ClamPizza())
+        case .Veggie:
+            pizza = ZJGPizzaDecorator.init(VeggiePizza())
+        }
+        return pizza
+    }
+}
+//MARK:------4、抽象工厂模式
+//问题：一些加盟店使用低价原料来增加利润，你需要采取一些措施，避免长此以往毁了披萨的品牌
+//需求：需要确保原料的一致，所以需要建造原料工厂，这个工厂复杂创建原料家族中的每一种原料
+//抽象原料工厂
+protocol PizzaIngredientFactory {
+    func createCheese()->PizzaType
+    func createVeggie()->PizzaType
+    func createPepperoni()->PizzaType
+    func createClam()->PizzaType
+}
+//创建纽约原料工厂
+class NYPizzaIngredientFactory : PizzaIngredientFactory{
+    func createCheese() -> PizzaType {
+        return NYPizzaDecorator.init(CheesePizza())
+    }
+    
+    func createVeggie() -> PizzaType {
+        return NYPizzaDecorator.init(VeggiePizza())
+    }
+    
+    func createPepperoni() -> PizzaType {
+        return NYPizzaDecorator.init(PepperoniPizza())
+    }
+    
+    func createClam() -> PizzaType {
+        return NYPizzaDecorator.init(ClamPizza())
+    }
+}
+//创建芝加哥原料工厂
+class ZJGPizzaIngredientFactory : PizzaIngredientFactory{
+    func createCheese() -> PizzaType {
+        return ZJGPizzaDecorator.init(CheesePizza())
+    }
+    
+    func createVeggie() -> PizzaType {
+        return ZJGPizzaDecorator.init(VeggiePizza())
+    }
+    
+    func createPepperoni() -> PizzaType {
+        return ZJGPizzaDecorator.init(PepperoniPizza())
+    }
+    
+    func createClam() -> PizzaType {
+        return ZJGPizzaDecorator.init(ClamPizza())
+    }
+}
+//披萨店
+class PizzaStore4{
+    var factory : PizzaIngredientFactory
+    
+    init(_ factory : PizzaIngredientFactory) {
+        self.factory = factory
+    }
+    
+    func setFactory(_ factory:PizzaIngredientFactory){
+        self.factory = factory
+    }
+    
+    private func createPizza(_ type: PizzaTypeEnumeration2) -> PizzaType {
+        var pizza : PizzaType
+        switch type {
+        case .Cheese:
+            pizza = factory.createCheese()
+        case .Pepperoni:
+            pizza = factory.createPepperoni()
+        case .Clam:
+            pizza = factory.createClam()
+        case .Veggie:
+            pizza = factory.createVeggie()
+        }
+        return pizza
+    }
+    
+    func orderPizza(_ type : PizzaTypeEnumeration2){
+        var pizza : PizzaType
+        pizza = createPizza(type)
+        
+        pizza.description()
+    }
+}
+

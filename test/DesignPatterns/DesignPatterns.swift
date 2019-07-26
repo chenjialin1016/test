@@ -4,7 +4,7 @@
 //
 //  Created by Jialin Chen on 2019/7/1.
 //  Copyright © 2019年 Jialin Chen. All rights reserved.
-//
+//https://www.cnblogs.com/ludashi/p/5395849.html
 
 import UIKit
 
@@ -122,5 +122,54 @@ func designPatternsTest(){
     user5.fireWithType(.AK)
     user5.fireWithType(.HK)
     user5.fireWithType(.AWP)
+    print("------披萨：无工厂")
+    var pizza : PizzaStore = PizzaStore()
+    pizza.orderPizza(.Cheese)
+    pizza.orderPizza(.Greek)
+    print("------披萨：简单工厂")
+    var pizza2 : PizzaStore2 = PizzaStore2.init(SimplePizzaFactory())
+    pizza2.orderPizza(.Cheese)
+    pizza2.orderPizza(.Pepperoni)
+    print("------披萨：工厂方法")
+    var pizza3 : PizzaStore3 = NYStylePizzaStore()
+    pizza3.orderPizza(.Cheese)
+    pizza3 = ZJGStylePizzaStore()
+    pizza3.orderPizza(.Clam)
+    print("------披萨：抽象工厂方法")
+    var pizza4 : PizzaStore4 = PizzaStore4.init(NYPizzaIngredientFactory())
+    pizza4.orderPizza(.Cheese)
+    pizza4.setFactory(ZJGPizzaIngredientFactory())
+    pizza4.orderPizza(.Pepperoni)
     print("\n")
+    
+    
+    print("==============单例模式==============")
+    print("------GCD实现单例")
+    let singleton1 = SingletonManager.sharedInstance()
+    let singleton2 = SingletonManager.sharedInstance()
+    printAdress(singleton1 as AnyObject, singleton2 as AnyObject)
+    print("------静态实现单例")
+    let singleton3 = SingletonManager1.sharedInstance()
+    let singleton4 = SingletonManager1.sharedInstance()
+    printAdress(singleton3 as AnyObject, singleton4 as AnyObject)
+    print("\n")
+    
+    
+    print("==============命令模式==============")
+    var console : Console = Console()
+    console.setCommand(LightOnCommand())
+    console.action()
+    console.setCommand(LightOffCommand())
+    console.action()
+    console.setCommand(ComputerStartCommand())
+    console.action()
+    print("\n")
+    
+}
+
+//查看对象内存地址
+func printAdress(_ values : AnyObject...){
+    for value in values {
+        print(Unmanaged.passUnretained(value).toOpaque())
+    }
 }
