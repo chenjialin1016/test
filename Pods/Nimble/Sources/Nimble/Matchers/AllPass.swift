@@ -65,7 +65,7 @@ extension NMBObjCMatcher {
             
             var collectionIsUsable = true
             if let value = actualValue as? NSFastEnumeration {
-                var generator = NSFastEnumerationIterator(value)
+                let generator = NSFastEnumerationIterator(value)
                 while let obj = generator.next() {
                     if let nsObject = obj as? NSObject {
                         nsObjects.append(nsObject)

@@ -2637,13 +2637,319 @@ class Algorithm{
         }
         return nil
     }
-    //MARK:-----------
-    //MARK:-----------
-    //MARK:-----------
+    //MARK:-----------二叉树的最近公共祖先
+    /*
+    class func lowestCommonAncestorOfTree(_ root : TreeNode?, _ p : TreeNode?, _ q : TreeNode?)->TreeNode{
+        /*
+         递归 O(n)
+         先深度遍历改树。当你遇到节点 p 或 q 时，返回一些布尔标记。该标志有助于确定是否在任何路径中找到了所需的节点。最不常见的祖先将是两个子树递归都返回真标志的节点。它也可以是一个节点，它本身是p或q中的一个，对于这个节点,子树递归返回一个真标志。
+
+         算法：
+         1）从根节点开始遍历树。
+         2）如果当前节点本身是 p 或 q 中的一个，我们会将变量 mid 标记为 true，并继续搜索左右分支中的另一个节点。
+         3）如果左分支或右分支中的任何一个返回 true，则表示在下面找到了两个节点中的一个。
+         4）如果在遍历的任何点上，左、右或中三个标志中的任意两个变为 true，这意味着我们找到了节点 p 和 q 的最近公共祖先。
+         */
+        recurseTree(root, p, q)
+        return ans!
+    }
+    private static var ans : TreeNode?
+    private class func recurseTree(_ currentNode : TreeNode?, _ p : TreeNode?, _ q : TreeNode?)->Bool{
+        if currentNode == nil {
+            return false
+        }
+        //如果左子树递归返回true
+        let left = recurseTree(currentNode?.left, p, q) ? 1 : 0
+        ////如果左子树递归返回true
+        let right = recurseTree(currentNode?.right, p, q) ? 1 : 0
+        let mid = (currentNode?.val == p?.val || currentNode?.val == q?.val) ? 1 : 0
+
+        if mid+left+right >= 2 {
+            ans = currentNode
+        }
+        return (mid+left+right > 0)
+    }
+    class func lowestCommonAncestorOfTree2(_ root : TreeNode?, _ p : TreeNode?, _ q : TreeNode?)->TreeNode{
+        /*
+         使用父指针迭代 O(n)
+         如果每个节点都有父指针，那么我们可以从 p 和 q 返回以获取它们的祖先。在这个遍历过程中，我们得到的第一个公共节点是 LCA 节点。我们可以在遍历树时将父指针保存在字典中
+
+         算法：
+         1）从根节点开始遍历树。
+         2）在找到 p 和 q 之前，将父指针存储在字典中。
+         3）一旦我们找到了 p 和 q，我们就可以使用父亲字典获得 p 的所有祖先，并添加到一个称为祖先的集合中。
+         4）同样，我们遍历节点 q 的祖先。如果祖先存在于为 p 设置的祖先中，这意味着这是 p 和 q 之间的第一个共同祖先（同时向上遍历），因此这是 LCA 节点。
+         */
+        var p = p
+        var q = q
+        var stack : [TreeNode?]  = [TreeNode?]()
+        var parent : [(TreeNode?, TreeNode?)] = []
+        parent.append((root, nil))
+        stack.append(root)
+
+        let isContainP = parent.contains { (arg) -> Bool in
+
+            let (key, value) = arg
+            return key?.val == (p?.val)! && key?.left == (p?.left)! && key?.right == (p?.right)!
+        }
+        let isContainQ = parent.contains { (arg) -> Bool in
+
+            let (key, value) = arg
+            return key?.val == (q?.val)! && key?.left == (q?.left)! && key?.right == (q?.right)!
+        }
+        while !isContainP || !isContainQ{
+            var node : TreeNode = stack.popLast() as! TreeNode
+
+            if node.left != nil{
+                parent.append((node.left,node))
+                stack.append(node.left)
+            }
+            if node.right != nil{
+                parent.append((node.right, node))
+                stack.append(node.right)
+            }
+        }
+
+        var ancestor : [TreeNode?] = [TreeNode?]()
+        while p != nil {
+            ancestor.append(p)
+            for (key,value) in parent{
+                if key?.val == p?.val && key?.left == p?.left && key?.right == p?.right{
+                    p = value
+                    break
+                }else{
+                    continue
+                }
+            }
+        }
+
+        while !ancestor.contains(q) {
+            for (key,value) in parent{
+                if key?.val == q?.val && key?.left == q?.left && key?.right == q?.right{
+                    q = value
+                    break
+                }else{
+                    continue
+                }
+            }
+            return q
+        }
+    }
+    class func lowestCommonAncestorOfTree3(_ root : TreeNode?, _ p : TreeNode?, _ q : TreeNode?)->TreeNode?{
+        /*
+         无父指针的迭代 O(n)
+         算法：
+         1）从根节点开始。
+         2）将 (root, root_state) 放在堆栈上。root_state 定义要遍历该节点的一个子节点还是两个子节点。
+         3）当堆栈不为空时，查看堆栈的顶部元素，该元素表示为 (parent_node, parent_state)。
+         4）在遍历 parent_node 的任何子节点之前，我们检查 parent_node 本身是否是 p 或 q 中的一个。
+         5）当我们第一次找到 p 或 q 的时候，设置一个布尔标记，名为 one_node_found 为 true 。还可以通过在变量 LCA_index 中记录堆栈的顶部索引来跟踪最近的公共祖先。因为堆栈的所有当前元素都是我们刚刚发现的节点的祖先。
+         6）第二次 parent_node == p or parent_node == q 意味着我们找到了两个节点，我们可以返回 LCA node。
+         7）每当我们访问 parent_node 的子节点时，我们将 (parent_node, updated_parent_state) 推到堆栈上。我们更新父级的状态为子级/分支已被访问/处理，并且相应地更改状态。
+         8）当状态变为 BOTH_DONE 时，最终会从堆栈中弹出一个节点，这意味着左、右子树都被推到堆栈上并进行处理。如果 one_node_found 是 true 的，那么我们需要检查被弹出的顶部节点是否可能是找到的节点的祖先之一。在这种情况下，我们需要将LCA_index减少一个。因为其中一位祖先被弹出了。 当同时找到 p 和 q 时，LCA_index 将指向堆栈中包含 p 和 q 之间所有公共祖先的索引。并且 LCA_index 元素具有p和q之间的最近公共祖先。
+
+         */
+        var stack : [(TreeNode?, TreeNodeFlag)] = [] as! [(TreeNode?, TreeNodeFlag)]
+        stack.append((root, TreeNodeFlag.Both_Panding))
+
+        var one_node_found : Bool = false
+        var LCA : TreeNode? = nil
+        var child_node : TreeNode? = nil
+
+        while !stack.isEmpty {
+            var top : Dictionary = stack.removeFirst()
+            var parent_node : TreeNode? = top.0
+            var parent_state : TreeNodeFlag = top.1
+
+            if parent_state != TreeNodeFlag.Both_Done {
+                if parent_state == TreeNodeFlag.Both_Panding {
+                    if parent_node?.val == p?.val || parent_node?.val == q?.val{
+                        if one_node_found {
+                            return LCA!
+                        }else{
+                            one_node_found = true
+                            LCA = stack.removeFirst().0
+                        }
+                    }else {
+                        child_node = parent_node!.right
+                    }
+
+                    stack.removeFirst()
+                    stack.append((parent_node, parent_state-1))
+
+                    if child_node != nil{
+                        stack.append((child_node, TreeNodeFlag.Both_Panding))
+                    }
+                }else{
+                    if LCA == stack.removeFirst().0 && one_node_found{
+                        LCA = stack.removeFirst().0
+                    }
+                }
+            }
+            return nil
+        }
+    }
+ */
+    //MARK:-----------删除链表中的节点
+    class func deleteNode(_ node : ListNode?){
+        
+        /*
+         与下一个节点交换 O(1)。
+         我们无法访问我们想要删除的节点 之前 的节点，我们始终不能修改该节点的 next 指针。相反，我们必须将想要删除的节点的值替换为它后面节点中的值，然后删除它之后的节点。
+         */
+        node?.val = (node?.next?.val)!
+        node?.next = node?.next?.next
+    }
+    //MARK:-----------除自身以外数组的乘积
+    class func productExceptSelf(_ nums: [Int])->[Int]{
+        /*
+         乘积 = 当前数左边的乘积 * 当前数右边的乘积
+         */
+        var res: [Int] = [Int].init(repeating: 0, count: nums.count)
+        var k = 1
+        for i in 0..<res.count {
+            res[i] = k
+            //此时数组存储的是除去当前元素左边的元素
+            k = k*nums[i]
+        }
+        k = 1
+        for i in (0...res.count-1).reversed() {
+            //k为该数右边的乘积
+            res[i] *= k
+            
+            //此时数组等于左边的 * 该数右边的
+            k *= nums[i]
+        }
+        return res
+    }
+    class func productExceptSelf2(_ nums: [Int])->[Int]{
+        /*
+         上三角、下三角
+         
+         因为空间复杂度要求O(1)、不能使用除法，因此一定需要在乘法过程中得到所有答案；
+         我们可以将res数组列成乘积形式，形成一个矩阵，可以发现矩阵次主角线全部为1（因为当前数字不相乘，因此等价为乘1）；
+         因此，我们分别计算矩阵的上三角和下三角，并且在计算过程中储存过程值，最终可以在遍历2遍nums下完成结果计算。
+         
+         res
+         res[0] =      1          num[1]   ...    num[n-2]    num[n-1]
+         res[1] =      num[0]       1      ...    num[n-2]    num[n-1]
+         ...            ...        ...     ...    num[n-2]    num[n-1]
+         res[n-2] =    num[0]    num[1]    ...    1           num[n-1]
+         res[n-1] =    num[0]    num[1]    ...    num[n-2]    1
+         
+
+         */
+        var res: [Int] = [Int].init(repeating: 0, count: nums.count)
+        var p = 1
+        var q = 1
+        for i in 0..<nums.count {
+            res[i] = p
+            p *= nums[i]
+        }
+        for i in (1...nums.count-1).reversed() {
+            q *= nums[i]
+            res[i-1] *= q
+        }
+        return res
+    }
+    //MARK:-----------Nim游戏
+    class func canWinNim(_ n: Int)->Bool{
+        /*
+         极小化极大 O(1)
+         如果堆中石头的数量 n 不能被 4 整除，那么你总是可以赢得 Nim 游戏的胜利。
+         
+         推理：
+         让我们考虑一些小例子。显而易见的是，如果石头堆中只有一块、两块、或是三块石头，那么在你的回合，你就可以把全部石子拿走，从而在游戏中取胜。而如果就像题目描述那样，堆中恰好有四块石头，你就会失败。因为在这种情况下不管你取走多少石头，总会为你的对手留下几块，使得他可以在游戏中打败你。因此，要想获胜，在你的回合中，必须避免石头堆中的石子数为 4 的情况。
+
+         */
+        return n % 4 != 0
+    }
+    class func canWinNim2(_ n: Int)->Bool{
+        
+        /*
+         递归
+         */
+        if n <= 0 {
+            return false
+        }
+        if n <= 3 {
+            return true
+        }
+        return !canWinNim(n-1) || !canWinNim(n-2) || !canWinNim(n-3)
+    }
+    //MARK:-----------反转字符串
+    class func reverseString(_ s : inout [String]){
+        /*
+         递归：在原数组上进行反转
+         */
+        if s.count == 0 {
+            return
+        }
+        reverse(&s, 0)
+        print(s)
+    }
+    //表示c中从[1，n），左闭右开的元素已经翻转
+    private class func reverse(_ c: inout [String], _ l: Int){
+        if l == c.count-1 {
+            return
+        }
+        //c的[l+1，n）部分已经反转了，然后把c在1位置上的元素放最后去
+        reverse(&c, l+1)
+        
+        //暂存c上的元素
+        var c1 = c[l]
+        let n = c.count
+        
+        for i in l+1..<n {
+            c[i-1] = c[i]
+            if i == n-1 {
+                c[i] = c1
+            }
+        }
+    }
+    class func reverseString2(_ s : inout [String]){
+        /*
+         类似冒泡交换
+         */
+        var j = s.count-1
+        var i = 0
+        var temp : String
+        while i<j {
+            temp = s[i]
+            s[i] = s[j]
+            s[j] = temp
+            
+            i += 1
+            j -= 1
+        }
+        print(s)
+    }
+    //MARK:-----------反转字符串中的单词
+    class func reverseWords(_ s : String)->String{
+        if s == "" {
+            return s
+        }
+        var result = ""
+        var arr = s.split(separator: " ")
+        for s in arr {
+            result += String(s.reversed())
+            result += " "
+        }
+        return result
+    }
+    
     //MARK:-----------
     //MARK:-----------
     //MARK:-----------
 }
+
+//二叉树的最近公共祖先--枚举
+enum TreeNodeFlag:Int{
+    case Both_Done = 0
+    case Left_Done = 1
+    case Both_Panding = 2
+}
+
 //MARK:-----------最小栈
 /*
  106ms
@@ -2725,7 +3031,7 @@ protocol Stack {
     //出栈
     mutating func pop()->Element?
 }
-//定义一个证书栈
+//定义一个整数栈
 struct IntegerStack:Stack {
     typealias Element = Int
     private var stack = [Element]()
@@ -3380,5 +3686,75 @@ func algorithmTest(){
     print(Algorithm.lowestCommonAncestor(treeN24, treeN25, treeN28)?.val)
     print(Algorithm.lowestCommonAncestor2(treeN24, treeN25, treeN26)?.val)
     print(Algorithm.lowestCommonAncestor2(treeN24, treeN25, treeN28)?.val)
+    print("\n")
+    
+    print("二叉树的最近公共祖先")
+    let treeN33 = TreeNode(3)
+    let treeN34 = TreeNode(5)
+    let treeN35 = TreeNode(1)
+    let treeN36 = TreeNode(6)
+    let treeN37 = TreeNode(2)
+    let treeN38 = TreeNode(0)
+    let treeN39 = TreeNode(8)
+    let treeN40 = TreeNode(7)
+    let treeN41 = TreeNode(4)
+    treeN33.left = treeN34
+    treeN33.right = treeN35
+    treeN34.left = treeN36
+    treeN34.right = treeN37
+    treeN35.left = treeN38
+    treeN35.right = treeN39
+    treeN37.left = treeN40
+    treeN37.right = treeN41
+//    print(Algorithm.lowestCommonAncestorOfTree(treeN33, treeN34, treeN35).val)
+//    print(Algorithm.lowestCommonAncestorOfTree2(treeN33, treeN34, treeN35).val)
+//    print(Algorithm.lowestCommonAncestorOfTree3(treeN33, treeN34, treeN35).val)
+//    print(Algorithm.lowestCommonAncestorOfTree(treeN33, treeN34, treeN41).val)
+//    print(Algorithm.lowestCommonAncestorOfTree2(treeN33, treeN34, treeN41).val)
+//    print(Algorithm.lowestCommonAncestorOfTree3(treeN33, treeN34, treeN41).val)
+    print("\n")
+    
+    print("删除链表中的节点")
+    var listN244 : ListNode? = ListNode(4)
+    var listN245 = ListNode(5)
+    var listN246 = ListNode(1)
+    var listN247 = ListNode(9)
+    listN244!.next = listN245
+    listN245.next = listN246
+    listN246.next = listN247
+    listN247.next = nil
+    Algorithm.deleteNode(listN245)
+    while listN244 != nil {
+       print(listN244!.val)
+        if listN244!.next == nil  || listN244 == nil{
+            break
+        }else{
+            listN244 = listN244!.next!
+            continue
+        }
+    }
+    print("\n")
+    
+    print("除自身以外数组的乘积")
+    print(Algorithm.productExceptSelf([1, 2, 3, 4]))
+    print(Algorithm.productExceptSelf2([1, 2, 3, 4]))
+    print("\n")
+    
+    print("Nim游戏")
+    print(Algorithm.canWinNim(4))
+    print(Algorithm.canWinNim2(4))
+    print(Algorithm.canWinNim(3))
+    print(Algorithm.canWinNim2(3))
+    print("\n")
+    
+    print("字符串反转")
+    var s = ["h", "e", "l", "l", "o"]
+    Algorithm.reverseString(&s)
+    var s2 = ["H", "a", "n", "n", "a", "h"]
+    Algorithm.reverseString2(&s2)
+    print("\n")
+    
+    print("发转字符串中的单词II")
+    print(Algorithm.reverseWords("let's take leetcode contest"))
     print("\n")
 }

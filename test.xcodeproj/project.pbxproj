@@ -47,6 +47,9 @@
 		0A1E6FD122C0C9DB00AEFB5B /* AddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A1E6FCF22C0C9DB00AEFB5B /* AddViewController.xib */; };
 		0A1E6FD522C0CA4C00AEFB5B /* AddReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E6FD322C0CA4C00AEFB5B /* AddReviewViewController.swift */; };
 		0A1E6FD622C0CA4C00AEFB5B /* AddReviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A1E6FD422C0CA4C00AEFB5B /* AddReviewViewController.xib */; };
+		0A1F55F722EEEC7C004CD3B4 /* CJLTableViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1F55F622EEEC7C004CD3B4 /* CJLTableViewProtocol.swift */; };
+		0A1F55F922EEF30F004CD3B4 /* CJLTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1F55F822EEF30F004CD3B4 /* CJLTableViewDelegate.swift */; };
+		0A1F55FB22EEF889004CD3B4 /* CJLTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1F55FA22EEF889004CD3B4 /* CJLTableViewController.swift */; };
 		0A23BF9722CAFF450050664A /* 策略模式.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A23BF9622CAFF450050664A /* 策略模式.png */; };
 		0A23BF9922CB01D30050664A /* StrategyPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BF9822CB01D30050664A /* StrategyPattern.swift */; };
 		0A23BF9B22CB30110050664A /* ObservePattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BF9A22CB30110050664A /* ObservePattern.swift */; };
@@ -95,6 +98,7 @@
 		0AB4144A22DC296D00AC9570 /* UIButton+logger.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4144922DC296D00AC9570 /* UIButton+logger.m */; };
 		0AC6A79722B9E96500C98F79 /* MockDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC6A79622B9E96500C98F79 /* MockDemoTests.m */; };
 		0AC6A79922B9E9EE00C98F79 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC6A79822B9E9EE00C98F79 /* Person.swift */; };
+		0ACDE04622EEDC0F0079802A /* Pods_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACDE04522EEDC0F0079802A /* Pods_test.framework */; };
 		0AD617AF22B736A70007B7E1 /* test1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD617AE22B736A70007B7E1 /* test1UITests.swift */; };
 		0AD617BC22B774AA0007B7E1 /* Scene3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD617B922B774AA0007B7E1 /* Scene3ViewController.swift */; };
 		0AD617BD22B774AA0007B7E1 /* Scene2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD617BA22B774AA0007B7E1 /* Scene2ViewController.swift */; };
@@ -106,7 +110,6 @@
 		0AFCEC9F22BB7EC3007C83D2 /* Dolphin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFCEC9E22BB7EC3007C83D2 /* Dolphin.swift */; };
 		0AFCECA322BB7F64007C83D2 /* DolphinTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFCECA222BB7F64007C83D2 /* DolphinTests.swift */; };
 		0AFCECA522BB7FE3007C83D2 /* DolphinQuickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFCECA422BB7FE3007C83D2 /* DolphinQuickTests.swift */; };
-		96495EDA75960C3F0AC7C859 /* Pods_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79D4770CE2156E8FCD616E09 /* Pods_test.framework */; };
 		C9718F05713DB937F923D1ED /* Pods_test1UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD6A0CE3159B529D165B19D5 /* Pods_test1UITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -213,6 +216,9 @@
 		0A1E6FCF22C0C9DB00AEFB5B /* AddViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddViewController.xib; sourceTree = "<group>"; };
 		0A1E6FD322C0CA4C00AEFB5B /* AddReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewViewController.swift; sourceTree = "<group>"; };
 		0A1E6FD422C0CA4C00AEFB5B /* AddReviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddReviewViewController.xib; sourceTree = "<group>"; };
+		0A1F55F622EEEC7C004CD3B4 /* CJLTableViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CJLTableViewProtocol.swift; sourceTree = "<group>"; };
+		0A1F55F822EEF30F004CD3B4 /* CJLTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CJLTableViewDelegate.swift; sourceTree = "<group>"; };
+		0A1F55FA22EEF889004CD3B4 /* CJLTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CJLTableViewController.swift; sourceTree = "<group>"; };
 		0A23BF9622CAFF450050664A /* 策略模式.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "策略模式.png"; sourceTree = "<group>"; };
 		0A23BF9822CB01D30050664A /* StrategyPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyPattern.swift; sourceTree = "<group>"; };
 		0A23BF9A22CB30110050664A /* ObservePattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservePattern.swift; sourceTree = "<group>"; };
@@ -280,6 +286,7 @@
 		0AC6A7A222BA106F00C98F79 /* OCMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMock.h; sourceTree = "<group>"; };
 		0AC6A7A322BA106F00C98F79 /* OCMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockObject.h; sourceTree = "<group>"; };
 		0AC6A7A422BA106F00C98F79 /* OCMockRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockRecorder.h; sourceTree = "<group>"; };
+		0ACDE04522EEDC0F0079802A /* Pods_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AD617AC22B736A70007B7E1 /* test1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = test1UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AD617AE22B736A70007B7E1 /* test1UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test1UITests.swift; sourceTree = "<group>"; };
 		0AD617B022B736A70007B7E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -311,10 +318,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ACDE04622EEDC0F0079802A /* Pods_test.framework in Frameworks */,
 				0A67C89922E981D600E20D11 /* IOKit.framework in Frameworks */,
 				0A1B0B1922DF103400FCDF5B /* FMDB.framework in Frameworks */,
 				0A1B0B1B22DF103400FCDF5B /* ReactiveCocoa.framework in Frameworks */,
-				96495EDA75960C3F0AC7C859 /* Pods_test.framework in Frameworks */,
 				0A488BF022B9D46600CA6BA7 /* libOCMock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,6 +381,7 @@
 		0913B391112ABE73FD6E9763 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0ACDE04522EEDC0F0079802A /* Pods_test.framework */,
 				0A67C89822E981D600E20D11 /* IOKit.framework */,
 				0A1B0B1822DF103400FCDF5B /* FMDB.framework */,
 				0A1B0B1A22DF103400FCDF5B /* ReactiveCocoa.framework */,
@@ -431,6 +439,10 @@
 				0A0CBD7F2283BF1800DFBB82 /* ViewController.swift */,
 				0A0F218922B2206B0010D70C /* ProjectClass.swift */,
 				0A64DEAD22D429F00003B15D /* SwiftTraversalOperation.swift */,
+				0A1F55F622EEEC7C004CD3B4 /* CJLTableViewProtocol.swift */,
+				0A1F55F822EEF30F004CD3B4 /* CJLTableViewDelegate.swift */,
+				0A1F55FA22EEF889004CD3B4 /* CJLTableViewController.swift */,
+				0A0CBD812283BF1800DFBB82 /* Main.storyboard */,
 				0A67C87522E97CF400E20D11 /* BatteryMonitor */,
 				0A1B0B1722DF0F3A00FCDF5B /* LagMonitor */,
 				0AB4144422DC1D0500AC9570 /* SMHook */,
@@ -441,7 +453,6 @@
 				0A0F21AA22B387C00010D70C /* SimulatonObjects */,
 				0A0F219B22B3868B0010D70C /* Alogrithm */,
 				0A0F219C22B386B40010D70C /* CodeReview */,
-				0A0CBD812283BF1800DFBB82 /* Main.storyboard */,
 				0A0CBD842283BF1B00DFBB82 /* Assets.xcassets */,
 				0A0CBD862283BF1B00DFBB82 /* LaunchScreen.storyboard */,
 				0AF7468B22B8DE6C00209A2B /* abbaData.json */,
@@ -1184,6 +1195,7 @@
 				0A4C31C4229BA10F005C1D1E /* SearchSummary.swift in Sources */,
 				0A57477922C9EBFF00A8BA6D /* CompleteCaseReview.swift in Sources */,
 				0A504CFC22A7B0A1004C2F2E /* DataReview.swift in Sources */,
+				0A1F55FB22EEF889004CD3B4 /* CJLTableViewController.swift in Sources */,
 				0AB4144722DC1FA600AC9570 /* UIViewController+logger.m in Sources */,
 				0A504CFA22A65E51004C2F2E /* ClassReview.swift in Sources */,
 				0A57477722C4CB1F00A8BA6D /* ExtendsReview.swift in Sources */,
@@ -1194,6 +1206,7 @@
 				0A1B0B1122DF088200FCDF5B /* SMLagDB.m in Sources */,
 				0AD617BE22B774AA0007B7E1 /* Scene1ViewController.swift in Sources */,
 				0A86029422E6DAE300A4E73A /* Singleton Pattern.swift in Sources */,
+				0A1F55F922EEF30F004CD3B4 /* CJLTableViewDelegate.swift in Sources */,
 				0A0F21A522B3879E0010D70C /* Download.swift in Sources */,
 				0A0F21A122B387800010D70C /* TrackCell.swift in Sources */,
 				0A67C87422E97CEE00E20D11 /* BatteryMonitor.m in Sources */,
@@ -1220,6 +1233,7 @@
 				0A0F218A22B2206B0010D70C /* ProjectClass.swift in Sources */,
 				0AD617C122B775B50007B7E1 /* LoginViewController.swift in Sources */,
 				0A370F4E2297CCFC00EF9AC2 /* Algorithm.swift in Sources */,
+				0A1F55F722EEEC7C004CD3B4 /* CJLTableViewProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1486,6 +1500,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64e armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
@@ -1518,6 +1533,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "test/test-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64e armv7 armv7s arm64";
 			};
 			name = Release;
 		};

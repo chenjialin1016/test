@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         customizeAppearance()
         
         //这里做卡顿监测
-        SMLagMonitor.shareInstance().begin()
+//        SMLagMonitor.shareInstance().begin()
         
         return true
     }
